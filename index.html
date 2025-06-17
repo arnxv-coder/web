@@ -1,83 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>arnxv</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="font-mono">
-    <main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
-      <!-- Header -->
-      <header class="text-center space-y-2">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-400">arnxv</h1>
-        <p class="text-sm sm:text-base md:text-lg text-gray-400 flex flex-wrap justify-center gap-2">
-          <span>13 y/o Dev</span> • 
-          <span>Minecraft :)</span> • 
-          <span>Discord Bots</span> • 
-          <span>Web Stuff</span>
-        </p>
-      </header>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>arnxv | 13 y/o Dev</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-mono">
+  <main class="max-w-3xl mx-auto p-6">
+    <header class="text-center">
+      <h1 class="text-4xl font-bold text-indigo-400">arnxv</h1>
+      <p class="text-sm text-gray-400 mt-2">13 y/o Dev • Minecraft :) • Discord Bots • Web Dev</p>
+    </header>
 
-      <!-- About -->
-      <section>
-        <h2 class="text-2xl font-bold mb-3">About Me</h2>
-        <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
-          I'm a 13-year-old developer who builds Discord bots, Minecraft plugin projects, and cool web apps.
-          I’m constantly learning and love automating stuff. Whether it’s making a bot smarter or designing a clean dashboard, I’m all in!
-        </p>
-      </section>
+    <section class="mt-10">
+      <h2 class="text-xl font-bold mb-2 border-b border-gray-700 pb-1">About Me</h2>
+      <p class="text-gray-300">
+        I'm a 13-year-old developer who builds Discord bots, Minecraft plugin projects, and cool web apps. I’m constantly learning and love automating stuff. Whether it’s making a bot smarter or designing a clean dashboard, I’m all in!
+      </p>
+    </section>
 
-      <!-- Projects -->
-      <section>
-        <h2 class="text-2xl font-bold mb-3">Projects</h2>
-        <div class="space-y-4">
-          <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold text-green-400">🟢 Keep Discord Account 24/7</h3>
-            <p class="text-gray-300 mt-1">
-              Keep your alt online forever — fully open-source & free. Feel free to contribute :)
-            </p>
-          </div>
-          <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold text-yellow-400">💰 PreX Coins Bot (coming soon)</h3>
-            <p class="text-gray-300 mt-1">
-              A currency system bot with shop, inventory, cooldowns, and admin tools.
-            </p>
-          </div>
-          <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold text-cyan-400">🔧 KindNodes</h3>
-            <p class="text-gray-300 mt-1">
-              Simple HTML/CSS dashboard for Minecraft server hosting providers :)
-            </p>
-          </div>
+    <section class="mt-10">
+      <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-1">Projects</h2>
+      <div class="space-y-4">
+        <div class="bg-gray-800 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold text-green-400">
+            <a href="https://github.com/arnxv-coder/discord-alt-24-7" target="_blank" class="flex items-center gap-2 hover:underline">
+              <i data-feather="zap"></i> Keep Discord Account 24/7
+            </a>
+          </h3>
+          <p class="text-gray-400 text-sm">Keep your alt online forever — fully open-source & free. Feel Free To Contribute :)</p>
         </div>
-      </section>
 
-      <!-- Contact -->
-      <section>
-        <h2 class="text-2xl font-bold mb-3">Contact</h2>
-        <ul class="text-gray-300 space-y-2">
-          <li>📧 Email: <a href="mailto:arnav@arnxv.is-a.dev" class="text-indigo-400 underline">arnav@arnxv.is-a.dev</a></li>
-          <li>💬 Discord: <span class="text-indigo-400">@arnxv.dev</span></li>
-        </ul>
-      </section>
-
-      <!-- Live Discord Status -->
-      <section>
-        <h2 class="text-lg font-semibold text-indigo-300">Live Discord Status</h2>
-        <div class="mt-2">
-          <img
-            class="rounded-lg w-full max-w-md mx-auto"
-            src="https://lanyard.cnrad.dev/api/1384352596357021736?borderRadius=8px&hideDiscriminators=true"
-            alt="Discord Status"
-          />
+        <div class="bg-gray-800 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold text-yellow-400">
+            <a href="#" class="flex items-center gap-2 cursor-not-allowed">
+              <i data-feather="clock"></i> PreX Coins Bot (Coming Soon)
+            </a>
+          </h3>
+          <p class="text-gray-400 text-sm">A currency system bot with shop, inventory, cooldowns, and admin tools.</p>
         </div>
-      </section>
 
-      <!-- Footer -->
-      <footer class="pt-10 border-t border-gray-700 text-center text-sm text-gray-500">
-        Made with ❤️ by arnxv | © 2025
-      </footer>
-    </main>
-  </body>
+        <div class="bg-gray-800 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold text-cyan-400">
+            <a href="https://github.com/arnxv-coder/KindNodes" target="_blank" class="flex items-center gap-2 hover:underline">
+              <i data-feather="server"></i> KindNodes
+            </a>
+          </h3>
+          <p class="text-gray-400 text-sm">Simple HTML/CSS dashboard for Minecraft server hosting providers :)</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-1">Contact</h2>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <i data-feather="mail"></i>
+          <a href="mailto:arnav@arnxv.is-a.dev" class="text-indigo-300 hover:underline">arnav@arnxv.is-a.dev</a>
+          <span class="text-sm text-gray-500">(in progress)</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <i data-feather="message-circle"></i>
+          <a href="https://discord.com/users/1384352596357021736" target="_blank" class="text-indigo-300 hover:underline">@arnxv.dev</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-10">
+      <div class="bg-gray-800 p-4 rounded-lg flex items-center gap-2">
+        <i data-feather="activity"></i>
+        <span class="text-indigo-300 font-medium">Live Discord Status</span>
+        <!-- You can embed a Discord presence widget or add real-time badge here -->
+        <img src="https://lanyard.cnrad.dev/api/1384352596357021736?theme=dark&animated=true&hideDiscrim=true&borderRadius=5px" alt="Discord Status" class="rounded-md">
+      </div>
+    </section>
+
+    <footer class="text-center text-gray-500 mt-10 border-t border-gray-700 pt-4 text-sm">
+      Made with <span class="text-red-500">❤️</span> by arnxv | &copy; 2025
+    </footer>
+  </main>
+  <script>
+    feather.replace();
+  </script>
+</body>
 </html>
