@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>made by arnxv homepage | arnxv</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M13.18 11.309c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801s1.3-.807 1.3-1.801c-.001-.992-.582-1.799-1.3-1.799zm4.526-4.683c.149-.365.155-2.439-.635-4.426 0 0-1.811.199-4.551 2.08-.575-.16-1.548-.238-2.519-.238-.973 0-1.945.078-2.52.238C4.74 2.399 2.929 2.2 2.929 2.2c-.789 1.987-.781 4.061-.634 4.426C1.367 7.634.8 8.845.8 10.497c0 7.186 5.963 7.301 7.467 7.301l1.734.002 1.732-.002c1.506 0 7.467-.115 7.467-7.301 0-1.652-.566-2.863-1.494-3.871zm-7.678 10.289h-.056c-3.771 0-6.709-.449-6.709-4.115 0-.879.31-1.693 1.047-2.369C5.537 9.304 7.615 9.9 9.972 9.9h.056c2.357 0 4.436-.596 5.664.531.735.676 1.045 1.49 1.045 2.369 0 3.666-2.937 4.115-6.709 4.115zm-3.207-5.606c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801.719 0 1.301-.807 1.301-1.801 0-.992-.582-1.799-1.301-1.799z'/%3E%3C/svg%3E" />
+
+  <!-- Tailwind & JetBrains Mono -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+
+  <!-- AOS + FontAwesome -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root { --brand:#6366f1; }
+    body{
+      font-family:'JetBrains Mono',monospace;
+      background:#111827;color:#f3f4f6;
+      min-height:100dvh;display:flex;align-items:center;justify-content:center;
+      scroll-behavior:smooth;animation:fadein .8s ease-in;
+    }
+    @keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .typewriter{overflow:hidden;white-space:nowrap;border-right:2px solid var(--brand);
+      animation:typing 3s steps(30,end),blink .75s step-end infinite;}
+    @keyframes typing{from{width:0}to{width:100%}} @keyframes blink{50%{border-color:transparent}}
+    .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.25);}
+  </style>
+</head>
+
+<body>
+  <main class="w-full max-w-5xl px-4 py-10">
+    <header class="text-center mb-14" data-aos="fade-up">
+      <h1 class="text-6xl font-bold text-[var(--brand)] mb-2">arnxv</h1>
+      <p class="text-xl text-gray-300 typewriter">Brave Start‑Page • Made by arnxv</p>
+      <p id="greet" class="text-lg text-gray-400 mt-3"></p>
+    </header>
+
+    <!-- Brave Search -->
+    <form id="searchForm"
+          action="https://search.brave.com/search"
+          class="mb-12 max-w-xl mx-auto" data-aos="fade-up">
+      <input name="q"
+             class="w-full glass rounded-xl px-4 py-3 text-gray-100 placeholder-gray-400 focus:outline-none"
+             placeholder="Search Brave …"
+             autocomplete="off" autofocus>
+    </form>
+
+    <!-- Quick links -->
+    <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up">
+      <!-- … link cards unchanged … -->
+      <a href="https://mail.google.com" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fas fa-envelope text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">Gmail</span>
+      </a>
+      <a href="https://github.com" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fab fa-github text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">GitHub</span>
+      </a>
+      <a href="https://chat.openai.com" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fas fa-robot text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">ChatGPT</span>
+      </a>
+      <a href="https://prex.bot.nu" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fas fa-coins text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">PreX Bot</span>
+      </a>
+      <a href="https://kind-nodes.arnxv.is-a.dev" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fas fa-server text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">KindNodes</span>
+      </a>
+      <a href="https://discord.com/users/1384352596357021736" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <i class="fab fa-discord text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">Discord Profile</span>
+      </a>
+    </section>
+
+    <footer class="mt-16 text-center text-sm text-gray-500" data-aos="fade-up">
+      made by arnxv homepage | © 2025
+    </footer>
+  </main>
+
+  <!-- AOS + greeting -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const greet = document.getElementById('greet');
+    function tick(){
+      const h=new Date().getHours();
+      greet.textContent = h<12?'Good morning ☀️':h<18?'Good afternoon 🌤️':'Good evening 🌙';
+    }
+    tick(); setInterval(tick,60_000);
+  </script>
+</body>
+</html>
