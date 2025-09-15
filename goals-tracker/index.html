@@ -7,11 +7,8 @@
 
   <!-- Tailwind CDN for quick modern UI -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js for progress history -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    /* small custom tweaks */
     .card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.04); }
     .tiny { font-size: .8rem; color: #9ca3af; }
     .muted { color: #94a3b8; }
@@ -23,434 +20,158 @@
 
   <header class="p-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" class="text-cyan-400">
-        <path d="M12 2L15 8H9L12 2Z" fill="currentColor" opacity=".9"/>
-        <path d="M12 22L9 16H15L12 22Z" fill="currentColor" opacity=".6"/>
-        <circle cx="12" cy="12" r="2" fill="currentColor" opacity=".8"/>
-      </svg>
-      <div>
-        <div class="text-xl font-semibold">GoalForge</div>
-        <div class="tiny">Full offline goal tracker — no accounts, single file</div>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <button id="btnExportJSON" class="bg-cyan-600 px-3 py-2 rounded shadow">Export JSON</button>
-      <button id="btnExportCSV" class="bg-cyan-600 px-3 py-2 rounded shadow">Export CSV</button>
-      <label for="importFile" class="bg-emerald-600 px-3 py-2 rounded shadow cursor-pointer">Import</label>
-      <input id="importFile" type="file" accept=".json" class="hidden">
-      <button id="btnNotifyPerm" class="btn-flat">Notifications</button>
+      <div class="text-xl font-semibold">GoalForge</div>
+      <div class="tiny">Offline goal tracker — single file</div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-    <!-- Left: Create + Filters -->
-    <section class="md:col-span-1 space-y-4">
+  <main class="max-w-4xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <!-- Add Goal Section -->
+    <section>
       <div class="p-4 card rounded-lg">
         <h3 class="font-semibold text-lg">Add Goal</h3>
-        <div class="mt-3 space-y-2">
-          <input id="goalTitle" placeholder="Goal title (e.g. Buy Nissan GTR)" class="w-full p-2 rounded bg-slate-900 border border-slate-700" />
-          <textarea id="goalNote" placeholder="Notes / motivation (optional)" class="w-full p-2 rounded bg-slate-900 border border-slate-700"></textarea>
-          <input id="goalTarget" type="number" placeholder="Target amount (optional, e.g. 1500000)" class="w-full p-2 rounded bg-slate-900 border border-slate-700" />
-          <input id="goalDeadline" type="datetime-local" class="w-full p-2 rounded bg-slate-900 border border-slate-700" />
-          <input id="goalTags" placeholder="Tags (comma separated)" class="w-full p-2 rounded bg-slate-900 border border-slate-700" />
-          <div class="flex gap-2">
-            <button id="btnAddGoal" class="bg-cyan-500 px-3 py-2 rounded">Add Goal</button>
-            <button id="btnClearAll" class="bg-slate-700 px-3 py-2 rounded">Clear ALL</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4 card rounded-lg">
-        <h3 class="font-semibold text-lg">Filters & Search</h3>
-        <div class="mt-3 space-y-2">
-          <input id="searchBox" placeholder="Search goals, tags, notes..." class="w-full p-2 rounded bg-slate-900 border border-slate-700" />
-          <select id="filterDue" class="w-full p-2 rounded bg-slate-900 border border-slate-700">
-            <option value="all">All deadlines</option>
-            <option value="overdue">Overdue</option>
-            <option value="week">Next 7 days</option>
-            <option value="month">Next 30 days</option>
-          </select>
-          <select id="filterStatus" class="w-full p-2 rounded bg-slate-900 border border-slate-700">
-            <option value="all">All statuses</option>
-            <option value="notstarted">Not started</option>
-            <option value="inprogress">In progress</option>
-            <option value="done">Done</option>
-          </select>
-          <select id="sortBy" class="w-full p-2 rounded bg-slate-900 border border-slate-700">
-            <option value="new">Newest</option>
-            <option value="deadline">Nearest deadline</option>
-            <option value="progress">Least progress</option>
-            <option value="target">Largest target</option>
-          </select>
-          <button id="btnApplyFilters" class="bg-emerald-600 px-3 py-2 rounded w-full">Apply</button>
-        </div>
-      </div>
-
-      <div class="p-4 card rounded-lg">
-        <h3 class="font-semibold text-lg">Quick Stats</h3>
-        <div id="quickStats" class="mt-3 text-sm muted"></div>
-      </div>
-    </section>
-
-    <!-- Middle: Goals list -->
-    <section class="md:col-span-2 space-y-4">
-      <div class="p-4 card rounded-lg">
-        <div class="flex justify-between items-center">
-          <h2 class="font-semibold text-xl">Your Goals</h2>
-          <div class="tiny muted">Autosaves locally</div>
-        </div>
-
-        <div id="goalsContainer" class="mt-4 space-y-3"></div>
-
-        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div class="p-3 card rounded-lg">
-            <div class="tiny muted">Total Goals</div>
-            <div id="statTotal" class="text-2xl font-semibold">0</div>
-          </div>
-          <div class="p-3 card rounded-lg">
-            <div class="tiny muted">Completed</div>
-            <div id="statDone" class="text-2xl font-semibold">0</div>
-          </div>
-          <div class="p-3 card rounded-lg">
-            <div class="tiny muted">Avg Progress</div>
-            <div id="statAvg" class="text-2xl font-semibold">0%</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Charts & activity -->
-      <div class="p-4 card rounded-lg">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold">Progress History</h3>
-          <div class="tiny muted">Last 30 days</div>
-        </div>
-        <canvas id="historyChart" class="mt-3" height="100"></canvas>
-
-        <div class="mt-4">
-          <h4 class="font-semibold">Activity Log</h4>
-          <div id="activityLog" class="mt-2 text-sm muted max-h-40 overflow-auto"></div>
+        <input id="goalTitle" placeholder="Goal title" class="w-full mt-2 p-2 rounded bg-slate-900 border border-slate-700" />
+        <textarea id="goalNote" placeholder="Notes / motivation" class="w-full mt-2 p-2 rounded bg-slate-900 border border-slate-700"></textarea>
+        <input id="goalTarget" type="number" placeholder="Target amount" class="w-full mt-2 p-2 rounded bg-slate-900 border border-slate-700" />
+        <input id="goalDeadline" type="datetime-local" class="w-full mt-2 p-2 rounded bg-slate-900 border border-slate-700" />
+        <input id="goalTags" placeholder="Tags (comma separated)" class="w-full mt-2 p-2 rounded bg-slate-900 border border-slate-700" />
+        <div class="flex gap-2 mt-2">
+          <button id="btnAddGoal" class="bg-cyan-500 px-3 py-2 rounded">Add Goal</button>
+          <button id="btnClearAll" class="bg-rose-600 px-3 py-2 rounded">Clear All</button>
         </div>
       </div>
     </section>
+
+    <!-- Goals List -->
+    <section>
+      <h3 class="text-lg font-semibold mb-2">Your Goals</h3>
+      <div id="goalsContainer" class="space-y-3"></div>
+    </section>
+
   </main>
 
-  <!-- Goal Details Modal (simple slide-over) -->
-  <div id="detailOverlay" class="fixed inset-0 bg-black/60 hidden">
-    <div class="absolute right-0 top-0 bottom-0 w-full md:w-2/5 p-6 bg-slate-900 card overflow-auto">
-      <button id="closeDetail" class="text-sm px-2 py-1 rounded btn-flat">Close</button>
-      <div id="detailInner" class="mt-4"></div>
-    </div>
-  </div>
-
   <script>
-  /************************************************************************
-   * GoalForge: Single-file full-featured goal tracker
-   * - Persistence: localStorage (key: goalforge_data)
-   * - No accounts
-   * - Features: goals, subgoals, numeric targets, saved amounts,
-   *   deadlines, reminders (notification API), tags, search, filters,
-   *   export/import JSON & CSV, activity log, progress history chart
-   ************************************************************************/
+    // --- LocalStorage key ---
+    const STORAGE_KEY = 'goalforge_data_v1';
+    let data = { goals: [] };
 
-  // ----- Data Model -----
-  const STORAGE_KEY = 'goalforge_data_v1';
-  let data = { goals: [], activity: [], history: [] }; // history: {date, avgProgress}
-  let chart = null;
-  let reminderTimers = []; // keep timeouts to cancel/reset
-
-  // ----- Utilities -----
-  const uid = (p='g') => p + '_' + Date.now() + '_' + Math.floor(Math.random()*9999);
-  const save = () => { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); updateUI(); scheduleReminders(); }
-  const load = () => {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      try { data = JSON.parse(raw); }
-      catch(e) { data = { goals: [], activity: [], history: [] }; }
-    } else {
-      data = { goals: [], activity: [], history: [] };
+    // --- Utilities ---
+    const uid = () => 'g_' + Date.now() + '_' + Math.floor(Math.random()*9999);
+    const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    const load = () => {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) data = JSON.parse(raw);
+      renderGoals();
     }
-  };
-  const logActivity = (text) => {
-    data.activity.unshift({ t: Date.now(), text });
-    if (data.activity.length > 300) data.activity.pop();
-  };
 
-  // ----- Reminders & Notifications -----
-  const askNotif = async () => {
-    if (!('Notification' in window)) return alert('Browser notifications not supported.');
-    if (Notification.permission === 'default') {
-      await Notification.requestPermission();
-    }
-    document.getElementById('btnNotifyPerm').innerText = Notification.permission === 'granted' ? 'Notifications ✓' : 'Notifications';
-  };
-  document.getElementById('btnNotifyPerm').addEventListener('click', askNotif);
+    // --- Add Goal ---
+    document.getElementById('btnAddGoal').addEventListener('click', ()=>{
+      const title = document.getElementById('goalTitle').value.trim();
+      if(!title) return alert('Add a title');
+      const note = document.getElementById('goalNote').value.trim();
+      const target = Number(document.getElementById('goalTarget').value)||0;
+      const deadline = document.getElementById('goalDeadline').value || null;
+      const tags = document.getElementById('goalTags').value.split(',').map(s=>s.trim()).filter(Boolean);
+      const g = { id: uid(), title, note, target, saved:0, deadline, tags, milestones:[] };
+      data.goals.unshift(g);
+      save();
+      renderGoals();
+      // clear inputs
+      document.getElementById('goalTitle').value = '';
+      document.getElementById('goalNote').value = '';
+      document.getElementById('goalTarget').value = '';
+      document.getElementById('goalDeadline').value = '';
+      document.getElementById('goalTags').value = '';
+    });
 
-  function scheduleReminders() {
-    // clear timeouts
-    reminderTimers.forEach(t => clearTimeout(t));
-    reminderTimers = [];
-    if (Notification.permission !== 'granted') return;
-
-    const now = Date.now();
-    data.goals.forEach(goal => {
-      if (!goal.reminderMins || !goal.deadline) return;
-      const remindAt = new Date(goal.deadline).getTime() - (goal.reminderMins * 60000);
-      if (remindAt > now) {
-        const ms = remindAt - now;
-        const t = setTimeout(() => {
-          new Notification('Reminder: ' + goal.title, { body: `Deadline at ${new Date(goal.deadline).toLocaleString()}` });
-          logActivity(`Reminder fired for "${goal.title}"`);
-          save(); // persist log
-        }, ms);
-        reminderTimers.push(t);
-      } else if (remindAt <= now && new Date(goal.deadline).getTime() > now) {
-        // if passed reminder time but not deadline, notify immediately
-        new Notification('Reminder: ' + goal.title, { body: `Deadline at ${new Date(goal.deadline).toLocaleString()}` });
-        logActivity(`Immediate reminder for "${goal.title}"`);
+    // --- Clear All Goals ---
+    document.getElementById('btnClearAll').addEventListener('click', ()=>{
+      if(confirm('Clear all goals?')) {
+        data.goals = [];
+        save();
+        renderGoals();
       }
     });
-  }
 
-  // ----- UI helpers -----
-  function formatDeadline(d) {
-    if (!d) return 'No deadline';
-    const t = new Date(d);
-    if (isNaN(t)) return 'Invalid date';
-    return t.toLocaleString();
-  }
-  function timeRemaining(deadline) {
-    if (!deadline) return null;
-    const now = Date.now();
-    const diff = new Date(deadline).getTime() - now;
-    if (diff <= 0) return 'Overdue';
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hrs = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    return `${days}d ${hrs}h ${mins}m`;
-  }
-
-  // ----- Create / Update / Delete Goal operations -----
-  document.getElementById('btnAddGoal').addEventListener('click', () => {
-    const title = document.getElementById('goalTitle').value.trim();
-    if (!title) return alert('Add a title');
-    const note = document.getElementById('goalNote').value.trim();
-    const target = Number(document.getElementById('goalTarget').value) || 0;
-    const deadlineRaw = document.getElementById('goalDeadline').value;
-    const tagsRaw = document.getElementById('goalTags').value;
-    const tags = tagsRaw.split(',').map(s => s.trim()).filter(Boolean);
-    const g = {
-      id: uid('g'),
-      title, note, target, saved: 0,
-      deadline: deadlineRaw || null,
-      tags, created: Date.now(),
-      milestones: [], // {id,title,amount,done}
-      reminderMins: 60, // default reminder 60 mins before
-      status: 'notstarted' // notstarted | inprogress | done
-    };
-    data.goals.unshift(g);
-    logActivity(`Created goal "${title}"`);
-    // clear inputs
-    document.getElementById('goalTitle').value = '';
-    document.getElementById('goalNote').value = '';
-    document.getElementById('goalTarget').value = '';
-    document.getElementById('goalDeadline').value = '';
-    document.getElementById('goalTags').value = '';
-    save();
-  });
-
-  function addMilestone(goalId, title, amount=0) {
-    const g = data.goals.find(x => x.id === goalId);
-    if (!g) return;
-    g.milestones.push({ id: uid('m'), title, amount: Number(amount)||0, done:false });
-    logActivity(`Added milestone "${title}" to "${g.title}"`);
-    save();
-  }
-
-  function toggleMilestone(goalId, mid) {
-    const g = data.goals.find(x => x.id === goalId);
-    if (!g) return;
-    const m = g.milestones.find(x => x.id===mid);
-    if (!m) return;
-    m.done = !m.done;
-    // if milestone has amount and is marked done, add to saved (only once)
-    if (m.done) {
-      g.saved = Number(g.saved || 0) + (Number(m.amount) || 0);
-      logActivity(`Milestone "${m.title}" done -> added ${m.amount} to "${g.title}"`);
-    } else {
-      // if undone, subtract amount (careful)
-      g.saved = Math.max(0, Number(g.saved || 0) - (Number(m.amount) || 0));
-      logActivity(`Milestone "${m.title}" undone -> removed ${m.amount} from "${g.title}"`);
+    // --- Milestone ---
+    function addMilestone(goalId){
+      const title = prompt('Milestone title:');
+      if(!title) return;
+      const amount = Number(prompt('Amount (optional, number):','0'))||0;
+      const goal = data.goals.find(g=>g.id===goalId);
+      goal.milestones.push({ id: uid(), title, amount, done:false });
+      save();
+      renderGoals();
     }
-    updateStatus(g);
-    save();
-  }
 
-  function updateStatus(goal) {
-    // status based on progress
-    const totalM = goal.milestones.length;
-    const doneM = goal.milestones.filter(m => m.done).length;
-    if (goal.target > 0) {
-      const pct = Math.min(100, Math.round((Number(goal.saved)||0) / (goal.target||1) * 100));
-      goal.status = pct >= 100 ? 'done' : (pct>0 ? 'inprogress' : 'notstarted');
-    } else {
-      goal.status = totalM===0 ? 'notstarted' : (doneM===totalM ? 'done' : (doneM>0 ? 'inprogress' : 'notstarted'));
+    function toggleMilestone(goalId, milestoneId){
+      const goal = data.goals.find(g=>g.id===goalId);
+      const m = goal.milestones.find(m=>m.id===milestoneId);
+      m.done = !m.done;
+      if(m.done) goal.saved += m.amount;
+      else goal.saved -= m.amount;
+      save();
+      renderGoals();
     }
-  }
 
-  function deleteGoal(id) {
-    const g = data.goals.find(x => x.id === id);
-    if (!g) return;
-    if (!confirm(`Delete goal "${g.title}"? This cannot be undone.`)) return;
-    data.goals = data.goals.filter(x => x.id !== id);
-    logActivity(`Deleted goal "${g.title}"`);
-    save();
-  }
+    // --- Delete goal ---
+    function deleteGoal(goalId){
+      if(confirm('Delete this goal?')) {
+        data.goals = data.goals.filter(g=>g.id!==goalId);
+        save();
+        renderGoals();
+      }
+    }
 
-  function editGoalField(goalId, field, value) {
-    const g = data.goals.find(x => x.id === goalId);
-    if (!g) return;
-    g[field] = value;
-    updateStatus(g);
-    logActivity(`Edited "${g.title}" ${field}`);
-    save();
-  }
-
-  // ----- Rendering -----
-  function buildGoalCard(g) {
-    const totalMilestones = g.milestones.length || 0;
-    const doneMilestones = g.milestones.filter(m=>m.done).length || 0;
-    const pct = g.target>0 ? Math.round( (Number(g.saved)||0) / (g.target||1) * 100 ) : (totalMilestones? Math.round(doneMilestones/totalMilestones * 100):0);
-    const overdue = g.deadline && new Date(g.deadline).getTime() < Date.now();
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'p-4 rounded-lg card flex flex-col gap-2';
-
-    wrapper.innerHTML = `
-      <div class="flex justify-between items-start">
-        <div>
-          <div class="text-lg font-semibold">${escapeHtml(g.title)}</div>
-          <div class="tiny muted">${escapeHtml(g.note || '')}</div>
-          <div class="tiny mt-1">${g.tags.map(t=>`<span class="px-2 py-0.5 mr-1 rounded bg-white/5 text-xs">${escapeHtml(t)}</span>`).join('')}</div>
-        </div>
-        <div class="flex flex-col items-end gap-2">
-          <div class="tiny">${formatDeadline(g.deadline)}</div>
-          <div class="tiny">${g.target? `Saved ${g.saved}/${g.target}` : `${doneMilestones}/${totalMilestones} done`}</div>
-          <div class="tiny ${overdue?'text-rose-400':''}">${overdue? 'Overdue' : timeRemaining(g.deadline) || ''}</div>
-        </div>
-      </div>
-
-      <div class="w-full bg-slate-800 rounded h-3 overflow-hidden">
-        <div style="width:${Math.min(100,pct)}%;" class="h-3 bg-cyan-500"></div>
-      </div>
-
-      <div class="flex gap-2 items-center">
-        <button class="px-2 py-1 rounded btn-flat" data-action="details" data-id="${g.id}">Details</button>
-        <button class="px-2 py-1 rounded btn-flat" data-action="addmilestone" data-id="${g.id}">+ Milestone</button>
-        <button class="px-2 py-1 rounded btn-flat" data-action="addsaved" data-id="${g.id}">+ Add Saved</button>
-        <button class="px-2 py-1 rounded btn-flat text-rose-400" data-action="delete" data-id="${g.id}">Delete</button>
-      </div>
-    `;
-    // interaction binding
-    wrapper.querySelectorAll('button').forEach(b=>{
-      const act = b.dataset.action;
-      const id = b.dataset.id;
-      b.addEventListener('click', ()=> {
-        if (act === 'details') openDetails(id);
-        if (act === 'addmilestone') {
-          const t = prompt('Milestone title:'); if (!t) return;
-          const amt = prompt('Amount (optional, number):', '0');
-          addMilestone(id, t, amt || 0);
-        }
-        if (act === 'addsaved') {
-          const amt = prompt('Add amount to saved (number):', '0');
-          const gcur = data.goals.find(x=>x.id===id); if (!gcur) return;
-          gcur.saved = Number(gcur.saved || 0) + Number(amt||0);
-          updateStatus(gcur);
-          logActivity(`Added ${amt} to "${gcur.title}"`);
-          save();
-        }
-        if (act === 'delete') deleteGoal(id);
+    // --- Render Goals ---
+    function renderGoals(){
+      const container = document.getElementById('goalsContainer');
+      container.innerHTML = '';
+      data.goals.forEach(g=>{
+        const div = document.createElement('div');
+        div.className = 'p-4 card rounded-lg flex flex-col gap-2';
+        const pct = g.target? Math.min(100, Math.round(g.saved/g.target*100)) : g.milestones.length ? Math.round(g.milestones.filter(m=>m.done).length/g.milestones.length*100) : 0;
+        div.innerHTML = `
+          <div class="flex justify-between">
+            <div>
+              <div class="font-semibold">${g.title}</div>
+              <div class="tiny">${g.note||''}</div>
+              <div class="tiny mt-1">${g.tags.map(t=>`<span class="px-2 py-0.5 mr-1 rounded bg-white/5 text-xs">${t}</span>`).join('')}</div>
+            </div>
+            <div class="flex flex-col items-end">
+              <div class="tiny">${g.target? `Saved: ${g.saved}/${g.target}` : `${g.milestones.filter(m=>m.done).length}/${g.milestones.length} done`}</div>
+            </div>
+          </div>
+          <div class="w-full bg-slate-800 rounded h-3 overflow-hidden mt-1">
+            <div class="h-3 bg-cyan-500" style="width:${pct}%"></div>
+          </div>
+          <div class="flex gap-2 mt-2">
+            <button class="px-2 py-1 rounded btn-flat" onclick="addMilestone('${g.id}')">+ Milestone</button>
+            <button class="px-2 py-1 rounded btn-flat" onclick="deleteGoal('${g.id}')">Delete</button>
+          </div>
+          <div class="mt-2 space-y-1">
+            ${g.milestones.map(m=>`
+              <div>
+                <input type="checkbox" ${m.done?'checked':''} onchange="toggleMilestone('${g.id}','${m.id}')">
+                ${m.title} (${m.amount})
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(div);
       });
-    });
-    return wrapper;
-  }
-
-  function updateUI() {
-    // filters & search
-    const search = document.getElementById('searchBox').value.toLowerCase();
-    const filterDue = document.getElementById('filterDue').value;
-    const filterStatus = document.getElementById('filterStatus').value;
-    const sortBy = document.getElementById('sortBy').value;
-
-    let list = [...data.goals];
-
-    if (search) list = list.filter(g => (g.title+ ' '+ (g.note||'') + ' ' + (g.tags||[]).join(' ')).toLowerCase().includes(search));
-
-    // due filters
-    const now = Date.now();
-    if (filterDue === 'overdue') list = list.filter(g => g.deadline && new Date(g.deadline).getTime() < now);
-    else if (filterDue === 'week') list = list.filter(g => g.deadline && new Date(g.deadline).getTime() <= now + 7*24*60*60*1000);
-    else if (filterDue === 'month') list = list.filter(g => g.deadline && new Date(g.deadline).getTime() <= now + 30*24*60*60*1000);
-
-    // status filter
-    if (filterStatus !== 'all') list = list.filter(g => g.status === filterStatus);
-
-    // sort
-    if (sortBy === 'deadline') list.sort((a,b)=> {
-      if (!a.deadline) return 1; if (!b.deadline) return -1;
-      return new Date(a.deadline)-new Date(b.deadline);
-    });
-    else if (sortBy === 'progress') list.sort((a,b) => {
-      const pa = computeProgress(a), pb = computeProgress(b); return pa - pb;
-    });
-    else if (sortBy === 'target') list.sort((a,b)=> (b.target||0) - (a.target||0));
-    else list.sort((a,b)=> b.created - a.created);
-
-    // render
-    const cont = document.getElementById('goalsContainer');
-    cont.innerHTML = '';
-    list.forEach(g => cont.appendChild(buildGoalCard(g)));
-
-    // stats
-    const total = data.goals.length;
-    const done = data.goals.filter(g=>g.status==='done').length;
-    const avg = total ? Math.round(data.goals.reduce((s,g)=>s+computeProgress(g),0)/total) : 0;
-    document.getElementById('statTotal').innerText = total;
-    document.getElementById('statDone').innerText = done;
-    document.getElementById('statAvg').innerText = avg + '%';
-    document.getElementById('quickStats').innerHTML = `
-      <div>Total goals: ${total}</div>
-      <div>Completed: ${done}</div>
-      <div>Avg progress: ${avg}%</div>
-    `;
-
-    // activity log
-    const act = document.getElementById('activityLog');
-    act.innerHTML = data.activity.map(a => {
-      const time = new Date(a.t).toLocaleString();
-      return `<div class="p-1 border-b border-white/3">${time} — ${escapeHtml(a.text)}</div>`;
-    }).join('');
-
-    // update chart
-    updateChart();
-  }
-
-  function computeProgress(g) {
-    if (g.target && Number(g.target) > 0) {
-      return Math.min(100, Math.round((Number(g.saved)||0) / (g.target||1) * 100));
-    } else {
-      const total = g.milestones.length || 0;
-      if (total === 0) return 0;
-      const done = g.milestones.filter(m=>m.done).length;
-      return Math.round(done / total * 100);
     }
-  }
 
-  // ----- Details overlay -----
-  const overlay = document.getElementById('detailOverlay');
-  const inner = document.getElementById('detailInner');
-  document.getElementById('closeDetail').addEventListener('click', ()=> overlay.classList.add('hidden'));
+    // --- Escape HTML ---
+    function escapeHtml(str) {
+      if(!str) return '';
+      return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+    }
 
-  function openDetails(id) {
-    overlay.classList.remove('hidden')
+    // --- Initial load ---
+    load();
+  </script>
+
+</body>
+</html>
