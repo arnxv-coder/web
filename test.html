@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arnav's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    /* General */
+    body { font-family: 'Inter', sans-serif; margin:0; background:#f5f5f7; color:#111; scroll-behavior: smooth; }
+    a { text-decoration:none; color: inherit; }
+
+    /* Navbar */
+    header { position: fixed; width:100%; top:0; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; z-index:100;}
+    .logo { font-weight:700; font-size:1.5rem;}
+    nav ul { display:flex; gap:2rem; list-style:none;}
+    nav ul li a { font-weight:500; }
+    nav ul li a:hover { color:#007aff; }
+
+    /* Hero */
+    .hero { display:flex; flex-direction:column-reverse; justify-content:center; align-items:center; text-align:center; padding:10rem 5% 5rem; background: linear-gradient(120deg,#f5f5f7,#e0e0e0);}
+    .hero h1 { font-size:3rem; margin-bottom:1rem;}
+    .hero .highlight { color:#007aff; }
+    .hero p { font-size:1.2rem; margin-bottom:1.5rem; max-width:600px; }
+    .hero .btn { background:#007aff; color:#fff; padding:0.8rem 1.5rem; border-radius:999px; font-weight:500; transition:0.3s;}
+    .hero .btn:hover { background:#005bb5; }
+
+    /* About / Projects / Contact */
+    section { padding:5rem 5%; text-align:center; }
+    h2 { font-size:2rem; margin-bottom:2rem; }
+
+    /* Projects Grid */
+    .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; }
+    .project-card { background:#fff; border-radius:20px; padding:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .project-card:hover { transform: translateY(-5px); box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+    .project-card img { width:100%; border-radius:15px; margin-bottom:1rem; }
+
+    /* Contact Form */
+    form { display:flex; flex-direction:column; gap:1rem; max-width:500px; margin:0 auto; }
+    input, textarea { padding:0.8rem; border:1px solid #ccc; border-radius:10px; font-size:1rem; }
+    button { padding:0.8rem; border:none; border-radius:999px; background:#007aff; color:#fff; font-size:1rem; cursor:pointer; transition:0.3s; }
+    button:hover { background:#005bb5; }
+
+    /* Footer */
+    footer { text-align:center; padding:2rem; color:#666; font-size:0.9rem; }
+
+    /* Responsive Hero Image */
+    .hero img { max-width:400px; width:100%; margin-bottom:2rem; }
+    @media(min-width:768px){ .hero { flex-direction:row; text-align:left; } .hero img { margin-bottom:0; margin-left:3rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo">arnxv™</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Hello, I'm <span class="highlight">Arnav</span></h1>
+      <p>Creative coder & anime enthusiast. I build clean, minimal, and aesthetic web experiences.</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+    <img src="https://i.imgur.com/8Km9tLL.png" alt="Anime Illustration">
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm a 12-year-old student and beginner programmer from India. I love exploring web development, Discord bots, Python, and Minecraft server customization. My goal is to create beautiful and interactive web experiences.</p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://i.imgur.com/1.png" alt="Project 1">
+        <h3>Project One</h3>
+        <p>Notes generator for students. Minimal design, super functional.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://i.imgur.com/2.png" alt="Project 2">
+        <h3>Project Two</h3>
+        <p>Discord bot with economy features, including coins, shop, and inventory.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://i.imgur.com/3.png" alt="Project 3">
+        <h3>Project Three</h3>
+        <p>Dynamic portfolio with responsive design, inspired by Apple aesthetics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Not© 2025 Arnav. All rights not reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links (if browser doesn't support scroll-behavior)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
