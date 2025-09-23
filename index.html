@@ -1,140 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>arnxv | Developer</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M13.18 11.309c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801s1.3-.807 1.3-1.801c-.001-.992-.582-1.799-1.3-1.799zm4.526-4.683c.149-.365.155-2.439-.635-4.426 0 0-1.811.199-4.551 2.08-.575-.16-1.548-.238-2.519-.238-.973 0-1.945.078-2.52.238C4.74 2.399 2.929 2.2 2.929 2.2c-.789 1.987-.781 4.061-.634 4.426C1.367 7.634.8 8.845.8 10.497c0 7.186 5.963 7.301 7.467 7.301l1.734.002 1.732-.002c1.506 0 7.467-.115 7.467-7.301 0-1.652-.566-2.863-1.494-3.871zm-7.678 10.289h-.056c-3.771 0-6.709-.449-6.709-4.115 0-.879.31-1.693 1.047-2.369C5.537 9.304 7.615 9.9 9.972 9.9h.056c2.357 0 4.436-.596 5.664.531.735.676 1.045 1.49 1.045 2.369 0 3.666-2.937 4.115-6.709 4.115zm-3.207-5.606c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801.719 0 1.301-.807 1.301-1.801 0-.992-.582-1.799-1.301-1.799z'/%3E%3C/svg%3E" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <style>
-      body {
-        font-family: 'JetBrains Mono', monospace;
-        scroll-behavior: smooth;
-        animation: fadein 1s ease-in;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>arnxv | Developer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M13.18 11.309c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801s1.3-.807 1.3-1.801c-.001-.992-.582-1.799-1.3-1.799zm4.526-4.683c.149-.365.155-2.439-.635-4.426 0 0-1.811.199-4.551 2.08-.575-.16-1.548-.238-2.519-.238-.973 0-1.945.078-2.52.238C4.74 2.399 2.929 2.2 2.929 2.2c-.789 1.987-.781 4.061-.634 4.426C1.367 7.634.8 8.845.8 10.497c0 7.186 5.963 7.301 7.467 7.301l1.734.002 1.732-.002c1.506 0 7.467-.115 7.467-7.301 0-1.652-.566-2.863-1.494-3.871zm-7.678 10.289h-.056c-3.771 0-6.709-.449-6.709-4.115 0-.879.31-1.693 1.047-2.369C5.537 9.304 7.615 9.9 9.972 9.9h.056c2.357 0 4.436-.596 5.664.531.735.676 1.045 1.49 1.045 2.369 0 3.666-2.937 4.115-6.709 4.115zm-3.207-5.606c-.718 0-1.3.807-1.3 1.799 0 .994.582 1.801 1.3 1.801.719 0 1.301-.807 1.301-1.801 0-.992-.582-1.799-1.301-1.799z'/></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      scroll-behavior: smooth;
+      animation: fadein 1s ease-in;
+      transition: background 0.3s, color 0.3s;
+    }
 
-      @keyframes fadein {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      .typewriter {
-        overflow: hidden;
-        white-space: nowrap;
-        animation: typing 3s steps(30, end), blink .75s step-end infinite;
-        border-right: 2px solid #fff;
-      }
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #fff;
+    }
 
-      @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-      }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
 
-      @keyframes blink {
-        50% { border-color: transparent }
-      }
+    .progress-bar {
+      height: 6px;
+      background: #4f46e5;
+      border-radius: 3px;
+      transition: width 1.5s ease-in-out;
+    }
 
-      .glass {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-      }
-    </style>
-  </head>
+    /* Scroll spy active link */
+    .active-link {
+      color: #818cf8; /* Tailwind Indigo-400 */
+    }
 
-  <body class="bg-gray-900 text-white min-h-screen">
-    <div class="max-w-6xl mx-auto px-4 py-10">
-      <header class="text-center mb-12">
-        <h1 class="text-5xl font-bold text-indigo-400 mb-2">arnxv</h1>
-        <p class="text-xl text-gray-300 typewriter">13 y/o Dev • Minecraft :) • Cool WebApps</p>
-      </header>
+    /* Back-to-top button */
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4f46e5;
+      color: white;
+      padding: 0.6rem 0.9rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
 
-      <section id="about" class="mb-12" data-aos="fade-up">
-        <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">About Me</h2>
-        <p class="text-gray-300 leading-relaxed">
-          I'm a 13-year-old developer who builds cool web apps and choppy servers :) I'm currently learning Figma and n8n or make.com. I’m always learning new tech and love automating stuff. Whether it’s making a bot smarter or designing a clean dashboard, I’m all in!
-        </p>
-      </section>
-
-<section id="projects" class="mb-12" data-aos="fade-up">
-  <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Projects</h2>
-
-  <!-- Grid Wrapper -->
-  <div class="grid md:grid-cols-2 gap-6">
-    <!-- BloqHost -->
-    <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
-      <a href="https://bloqhost.vercel.app" target="_blank" class="block hover:underline text-lg font-bold text-indigo-300">
-        <i class="fas fa-server mr-2"></i>BloqHost
-      </a>
-      <p class="text-gray-400 mt-1">A Website for a minecraft server hosting provider made using Vite and ReactJS.</p>
+  <!-- Sticky Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-gray-900/70 backdrop-blur-md shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <span class="text-xl font-bold text-indigo-400">arnxv</span>
+      <ul class="flex space-x-6">
+        <li><a href="#about" class="hover:text-indigo-400 scroll-link">About</a></li>
+        <li><a href="#projects" class="hover:text-indigo-400 scroll-link">Projects</a></li>
+        <li><a href="#skills" class="hover:text-indigo-400 scroll-link">Skills</a></li>
+        <li><a href="#contact" class="hover:text-indigo-400 scroll-link">Contact</a></li>
+        <li><a href="#github" class="hover:text-indigo-400 scroll-link">GitHub</a></li>
+      </ul>
+      <button id="themeToggle" class="ml-4 bg-indigo-400 text-gray-900 px-3 py-1 rounded">🌙</button>
     </div>
+  </nav>
 
-    <!-- Goals Tracker -->
-    <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
-      <a href="/goals-tracker" target="_blank" class="block hover:underline text-lg font-bold text-indigo-300">
-        <i class="fas fa-bullseye mr-2"></i>Goals Tracker Web App
-        <span class="ml-2 text-xs bg-yellow-600 text-white px-2 py-0.5 rounded-full">Under Construction</span>
-      </a>
-      <p class="text-gray-400 mt-1">
-        Currently in the In-Development Phase. Focused on improving UI & UX for a smoother experience.
+  <div class="max-w-6xl mx-auto px-4 pt-24">
+
+    <!-- Hero / Header -->
+    <header class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-indigo-400 mb-2">arnxv</h1>
+      <p id="typewriter" class="text-xl typewriter text-gray-300"></p>
+      <div class="mt-4 flex justify-center space-x-4">
+        <a href="https://github.com/arnxv-coder?tab=repositories" target="_blank" class="bg-indigo-400 text-gray-900 px-4 py-2 rounded hover:bg-indigo-500 transition">What I did?</a>
+        <a href="#contact" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Hire Me / Contact</a>
+      </div>
+    </header>
+
+    <!-- About Me -->
+    <section id="about" class="mb-12" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">About Me</h2>
+      <p class="text-gray-300 leading-relaxed">
+        I'm a 13-year-old developer who builds cool web apps and choppy servers :) I'm currently learning Figma and n8n or make.com. I’m always learning new tech and love automating stuff.
       </p>
-    </div>
-  </div>
+    </section>
 
-  <!-- Gradify (Full Width) -->
-  <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition mt-6">
-    <a href="#" class="block hover:underline text-lg font-bold text-indigo-300">
-      <i class="fas fa-graduation-cap mr-2"></i>Gradify
-      <span class="ml-2 text-xs bg-yellow-600 text-white px-2 py-0.5 rounded-full">Under Construction</span>
-    </a>
-    <p class="text-gray-400 mt-1">
-      Gradify is a student-first learning companion built to make studying smarter and careers faster. 
-      It generates clear study notes, flashcards, and personalized learning plans powered by AI. 
-      <br>
-      <span class="text-sm text-yellow-400">🚧 Launch planned before mid-2026.</span>
-    </p>
-  </div>
+    <!-- Projects -->
+    <section id="projects" class="mb-12" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Projects</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
+          <a href="https://bloqhost.vercel.app" target="_blank" class="block hover:underline text-lg font-bold text-indigo-300">
+            <i class="fas fa-server mr-2"></i>BloqHost
+          </a>
+          <p class="text-gray-400 mt-1">A Website for a Minecraft server hosting provider made using Vite and ReactJS.</p>
+        </div>
 
-    <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition mt-6">
-    <a href="https://playforge-six.vercel.app" class="block hover:underline text-lg font-bold text-indigo-300">
-      <i class="fas fa-graduation-cap mr-2"></i>PlayForge
-    </a>
-    <p class="text-gray-400 mt-1">
-      PlayForge is a modern gaming hub showcasing top games and real-time news.
-      A personal project for frontend and API practice, not affiliated with any company.
-      <br>
-    </p>
-  </div>
-</section>
+        <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
+          <a href="/goals-tracker" target="_blank" class="block hover:underline text-lg font-bold text-indigo-300">
+            <i class="fas fa-bullseye mr-2"></i>Goals Tracker Web App
+            <span class="ml-2 text-xs bg-yellow-600 text-white px-2 py-0.5 rounded-full">Under Construction</span>
+          </a>
+          <p class="text-gray-400 mt-1">Currently in the In-Development Phase. Focused on improving UI & UX for a smoother experience.</p>
+        </div>
+      </div>
 
-      <section id="contact" data-aos="fade-up">
-        <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Contact</h2>
-        <p class="text-gray-300 mb-2">
-          <i class="fas fa-envelope mr-2 text-indigo-400"></i>
-          Email: <a href="mailto:arnav@arnxv.is-a.dev" class="text-indigo-400 hover:underline">arnav@arnxv.is-a.dev</a>
+      <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition mt-6">
+        <a href="#" class="block hover:underline text-lg font-bold text-indigo-300">
+          <i class="fas fa-graduation-cap mr-2"></i>Gradify
+          <span class="ml-2 text-xs bg-yellow-600 text-white px-2 py-0.5 rounded-full">Under Construction</span>
+        </a>
+        <p class="text-gray-400 mt-1">
+          Gradify is a student-first learning companion built to make studying smarter and careers faster.
+          It generates study notes, flashcards, and personalized learning plans powered by AI.
+          <br><span class="text-sm text-yellow-400">🚧 Launch planned before mid-2026.</span>
         </p>
-        <p class="text-gray-300 mb-2">
-          <i class="fab fa-discord mr-2 text-indigo-400"></i>
-          Discord: <a href="https://discord.com/users/1384352596357021736" target="_blank" class="text-indigo-400 hover:underline">@arnxv.dev</a>
-        </p>
-        <iframe src="https://lanyard-profile-readme.vercel.app/api/1384352596357021736" width="100%" class="rounded-lg mt-4" height="100" frameborder="0"></iframe>
-      </section>
+      </div>
+    </section>
 
-      <section class="mt-12" data-aos="fade-up">
-        <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">GitHub Stats</h2>
-        <img src="https://github-readme-stats.vercel.app/api?username=arnxv-coder&show_icons=true&theme=tokyonight" alt="GitHub Stats" class="mt-4 rounded-lg" />
-      </section>
+    <!-- Skills / Tools -->
+    <section id="skills" class="mb-12" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Skills & Tools</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-gray-300 mb-2">Languages</h3>
+          <p>Python</p>
+          <div class="w-full bg-gray-700 rounded-full mb-2"><div class="progress-bar" style="width: 80%"></div></div>
+          <p>JavaScript</p>
+          <div class="w-full bg-gray-700 rounded-full mb-2"><div class="progress-bar" style="width: 75%"></div></div>
+          <p>HTML/CSS</p>
+          <div class="w-full bg-gray-700 rounded-full mb-2"><div class="progress-bar" style="width: 85%"></div></div>
+        </div>
+        <div>
+          <h3 class="text-gray-300 mb-2">Tools & Other</h3>
+          <p>React, Tailwind, Node.js, Flask, Figma</p>
+          <div class="w-full bg-gray-700 rounded-full mb-2"><div class="progress-bar" style="width: 70%"></div></div>
+          <p>Minecraft server management, Discord bots</p>
+          <div class="w-full bg-gray-700 rounded-full mb-2"><div class="progress-bar" style="width: 60%"></div></div>
+        </div>
+      </div>
+    </section>
 
-      <footer class="mt-12 text-sm text-gray-500 border-t border-gray-700 pt-4 text-center">
-        Made with ❤️ by arnxv | © 2025
-      </footer>
-    </div>
+    <!-- Contact -->
+    <section id="contact" class="mb-12" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Contact</h2>
+      <p class="text-gray-300 mb-2">
+        <i class="fas fa-envelope mr-2 text-indigo-400"></i>Email: <a href="mailto:arnav@arnxv.is-a.dev" class="text-indigo-400 hover:underline">arnav@arnxv.is-a.dev</a>
+      </p>
+      <p class="text-gray-300 mb-2">
+        <i class="fab fa-discord mr-2 text-indigo-400"></i>Discord: <a href="https://discord.com/users/1384352596357021736" target="_blank" class="text-indigo-400 hover:underline">@arnxv.dev</a>
+      </p>
+      <p class="text-gray-300 mb-2">
+        <i class="fab fa-github mr-2 text-indigo-400"></i>GitHub: <a href="https://github.com/arnxv-coder" class="text-indigo-400 hover:underline" target="_blank">arnxv-coder</a>
+      </p>
+      <p class="text-gray-300 mb-2">
+        <i class="fab fa-instagram mr-2 text-indigo-400"></i>Instagram: <a href="#" class="text-indigo-400 hover:underline">YourHandle</a>
+      </p>
+      <p class="text-gray-300 mb-2">
+        <i class="fab fa-stack-overflow mr-2 text-indigo-400"></i>StackOverflow: <a href="#" class="text-indigo-400 hover:underline">YourProfile</a>
+      </p>
+    </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
-  </body>
+    <!-- GitHub Stats -->
+    <section id="github" class="mb-12" data-aos="fade-up">
+      <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">GitHub Stats</h2>
+      <img src="https://github-readme-stats.vercel.app/api?username=arnxv-coder&show_icons=true&theme=tokyonight" alt="GitHub Stats" class="mt-4 rounded-lg" loading="lazy" />
+    </section>
+
+  </div>
+
+  <!-- Back-to-top Button -->
+  <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-sm text-gray-500 border-t border-gray-700 pt-4 text-center">
+    Quick Links: <a href="#about" class="hover:underline">About</a> | <a href="#projects" class="hover:underline">Projects</a> | <a href="#skills" class="hover:underline">Skills</a> | <a href="#contact" class="hover:underline">Contact</a> | <a href="#github" class="hover:underline">GitHub</a>
+    <br>
+    Not© 2025 arnxv | Made with ❤️ and code
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Typewriter with multiple messages
+    const typewriter = document.getElementById('typewriter');
+    const messages = [
+      "13 y/o Dev • Minecraft • Cool WebApps",
+      "Learning Figma & Automation Tools",
+      "Building the Web of Tomorrow"
+    ];
+    let i = 0;
+    function typeMessage() {
+      let msg = messages[i];
+      let index = 0;
+      typewriter.textContent = "";
+      let interval = setInterval(() => {
+        typewriter.textContent += msg[index];
+        index++;
+        if(index >= msg.length) {
+          clearInterval(interval);
+          setTimeout(()=> {
+            i = (i + 1) % messages.length;
+            typeMessage();
+          }, 1500);
+        }
+      }, 100);
+    }
+    typeMessage();
+
+    // Light/Dark mode toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      if(document.body.classList.contains('bg-gray-900')) {
+        document.body.classList.replace('bg-gray-900','bg-white');
+        document.body.classList.replace('text-white','text-gray-900');
+        themeToggle.textContent = "🌙";
+      } else {
+        document.body.classList.replace('bg-white','bg-gray-900');
+        document.body.classList.replace('text-gray-900','text-white');
+        themeToggle.textContent = "☀️";
+      }
+    });
+
+    // Scroll spy
+    const sections = document.querySelectorAll('section');
+    const links = document.querySelectorAll('.scroll-link');
+    window.addEventListener('scroll', () => {
+      let scrollPos = window.scrollY + 150;
+      sections.forEach(sec => {
+        if(scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+          links.forEach(link => {
+            link.classList.remove('active-link');
+            if(link.getAttribute('href').substring(1) === sec.getAttribute('id')) {
+              link.classList.add('active-link');
+            }
+          });
+        }
+      });
+
+      // Back to top button
+      const backBtn = document.getElementById('backToTop');
+      if(scrollPos > 500) backBtn.style.display = "block";
+      else backBtn.style.display = "none";
+    });
+
+    // Back to top click
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Animate progress bars on scroll
+    const progressBars = document.querySelectorAll('.progress-bar');
+    window.addEventListener('scroll', () => {
+      progressBars.forEach(bar => {
+        const barPos = bar.getBoundingClientRect().top;
+        const screenPos = window.innerHeight / 1.2;
+        if(barPos < screenPos){
+          bar.style.width = bar.style.width; // Already set inline widths
+        }
+      });
+    });
+  </script>
+</body>
 </html>
