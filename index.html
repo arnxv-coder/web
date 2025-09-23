@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,12 +15,16 @@
     body {
       font-family: 'JetBrains Mono', monospace;
       scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
+      background-color: #1a1a1a; /* default dark */
+      color: white;
     }
     .glass {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.3s, border-color 0.3s;
     }
     .typewriter {
       overflow: hidden;
@@ -30,7 +34,7 @@
     .progress-bar {
       height: 6px;
       border-radius: 3px;
-      transition: width 1.5s ease-in-out;
+      transition: width 1.5s ease-in-out, background-color 0.3s;
     }
     .active-link {
       color: #818cf8; /* Indigo */
@@ -49,10 +53,10 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white transition-colors duration-300">
+<body>
 
   <!-- Navbar -->
-  <nav class="fixed top-0 w-full z-50 bg-gray-900/70 backdrop-blur-md shadow-md">
+  <nav class="fixed top-0 w-full z-50 bg-gray-900/70 backdrop-blur-md shadow-md transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <span class="text-xl font-bold text-indigo-400">arnxv</span>
       <ul class="flex space-x-6">
@@ -82,7 +86,7 @@
     <!-- About -->
     <section id="about" data-aos="fade-up">
       <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">About Me</h2>
-      <p class="text-gray-300 leading-relaxed">
+      <p class="leading-relaxed">
         I'm a 13-year-old developer who builds web apps and Minecraft servers. I’m learning Figma, automation tools like n8n, and love creating clean dashboards and smarter bots.
       </p>
     </section>
@@ -183,15 +187,15 @@
       <div class="space-y-4">
         <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
           <h3 class="font-semibold text-indigo-300">Primary School</h3>
-          <p class="text-gray-400">Shemrock Jack & Jill School, Seoni(Nursery - 5th)</p>
+          <p>Shemrock Jack & Jill School, Seoni (Nursery - 5th)</p>
         </div>
         <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
           <h3 class="font-semibold text-indigo-300">Middle School</h3>
-          <p class="text-gray-400">Shemrock Jack & Jill School, Seoni(6th) | Vardhaman Podar Learn School, Seoni(7th - Current(7th))</p>
+          <p>Shemrock Jack & Jill School, Seoni(6th) | Vardhaman Podar Learn School, Seoni(7th - Current)</p>
         </div>
         <div class="glass rounded-xl p-4 shadow hover:shadow-xl transition">
           <h3 class="font-semibold text-indigo-300">High School / Current</h3>
-          <p class="text-gray-400">-- Future --</p>
+          <p>-- Future --</p>
         </div>
       </div>
     </section>
@@ -199,11 +203,11 @@
     <!-- Contact -->
     <section id="contact" data-aos="fade-up">
       <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Contact</h2>
-      <p class="text-gray-300 mb-2">
+      <p class="mb-2">
         <i class="fas fa-envelope mr-2 text-indigo-400"></i>Email: 
         <a href="mailto:me@arnxv.is-a.dev" class="text-indigo-400 hover:underline">arnav@arnxv.is-a.dev</a>
       </p>
-      <p class="text-gray-300 mb-2">
+      <p class="mb-2">
         <i class="fab fa-discord mr-2 text-indigo-400"></i>Discord: 
         <a href="https://discord.com/users/1384352596357021736" target="_blank" class="text-indigo-400 hover:underline">@arnxv.dev</a>
       </p>
@@ -224,7 +228,7 @@
 
     <!-- Footer -->
     <footer class="mt-12 text-sm text-gray-500 border-t border-gray-700 pt-4 text-center">
-      © 2025 arnxv | Made with ❤️ and <a href = "https://github.com/arnxv-coder/web">code</a> <br/>
+      © 2025 arnxv | Made with ❤️ and <a href="https://github.com/arnxv-coder/web">code</a>
     </footer>
 
   </div>
@@ -243,7 +247,6 @@
     ];
     let msgIndex = 0;
     const typewriter = document.getElementById('typewriter');
-
     function typeMessage() {
       const message = messages[msgIndex];
       typewriter.textContent = "";
@@ -260,17 +263,35 @@
     // Theme toggle
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      themeToggle.textContent = document.documentElement.classList.contains('dark') ? '🌙' : '☀️';
+      const body = document.body;
+      const glasses = document.querySelectorAll('.glass');
+
+      if(body.classList.contains('bg-dark')) {
+        // Switch to light
+        body.style.backgroundColor = '#f5f5f5';
+        body.style.color = '#1a1a1a';
+        glasses.forEach(el => {
+          el.style.background = 'rgba(255,255,255,0.6)';
+          el.style.borderColor = 'rgba(0,0,0,0.1)';
+        });
+        themeToggle.textContent = '☀️';
+      } else {
+        // Switch to dark
+        body.style.backgroundColor = '#1a1a1a';
+        body.style.color = 'white';
+        glasses.forEach(el => {
+          el.style.background = 'rgba(255,255,255,0.05)';
+          el.style.borderColor = 'rgba(255,255,255,0.1)';
+        });
+        themeToggle.textContent = '🌙';
+      }
     });
 
-    // Back-to-top
+    // Back-to-top & scroll spy
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      if(window.scrollY > 300) backToTop.style.display = 'block';
-      else backToTop.style.display = 'none';
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
 
-      // Scroll spy
       document.querySelectorAll('.scroll-link').forEach(link => {
         const section = document.querySelector(link.getAttribute('href'));
         if(section.offsetTop - 100 <= window.scrollY && section.offsetTop + section.offsetHeight - 100 > window.scrollY){
