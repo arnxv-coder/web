@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arnav's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #0b0b0c;
@@ -22,7 +22,7 @@
     html, body {
       background: linear-gradient(180deg, #05060a 0%, #071018 100%);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui;
       margin: 0;
       line-height: 1.45;
       scroll-behavior: smooth;
@@ -107,13 +107,55 @@
       padding: 36px 12px;
       color: var(--subtext);
     }
+    .timeline {
+      position: relative;
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: 2px;
+      height: 100%;
+      background: var(--accent-from);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-from);
+      border: 2px solid var(--bg);
+    }
+    .timeline-item h3 {
+      margin: 0;
+      font-weight: 600;
+      color: var(--accent-from);
+    }
+    .timeline-item p {
+      margin: 5px 0;
+      color: var(--subtext);
+    }
+    .timeline-item .date {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <h1 style="margin: 0; font-weight: 800; background: linear-gradient(90deg, var(--accent-from), var(--accent-to)); -webkit-background-clip: text; color: transparent;">Arnav</h1>
+    <h1 style="margin:0;font-weight:800;background:linear-gradient(90deg,var(--accent-from),var(--accent-to));-webkit-background-clip:text;color:transparent;">arnxv</h1>
   </div>
   <nav>
     <a href="#hero">Home</a>
@@ -129,7 +171,7 @@
     <div>
       <h2>Hi — I'm <span class="accent">Arnav</span></h2>
       <p class="lead">12-year-old beginner programmer from India 🇮🇳. I explore web development, Discord bots, ethical hacking basics, and Minecraft server customization. Currently learning and building cool projects for fun.</p>
-      <div style="margin: 16px 0;">
+      <div style="margin:16px 0;">
         <a class="button primary" href="#projects">View my work</a>
         <a class="chip" id="discord-status"><i class="fa-brands fa-discord"></i><span id="discord-text">Checking Discord...</span></a>
       </div>
@@ -140,23 +182,49 @@
   <section id="projects">
     <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
     <div class="projects-grid">
-      <div class="project-card"><h3>Personalized Dashboard</h3><p>A React-based dashboard with weather, news, to-do list, and quotes.</p></div>
-      <div class="project-card"><h3><a href="https://gradify-ten.vercel.app">Gradify</a></h3><p>A tool for students with notes generator, flashcards, and progress tracking.</p></div>
-      <div class="project-card"><h3><a href="https://playforge-six.vercel.app">PlayForge</a></h3><p>A Minecraft/gaming inspired hosting-style dashboard UI.</p></div>
-      <div class="project-card"><h3><a href="https://bloqhost.vercel.app">BloqHost</a></h3><p>A hosting dashboard concept project for developers.</p></div>
-      <div class="project-card"><h3>Portfolio Sites</h3><p>Several portfolio designs in Flask, React, and HTML/CSS.</p></div>
+      <div class="project-card">
+        <h3>Personalized Dashboard</h3>
+        <p>A React-based dashboard with weather, news, to-do list, and quotes.</p>
+      </div>
+      <div class="project-card">
+        <h3><a href="https://gradify-ten.vercel.app">Gradify</a></h3>
+        <p>A tool for students with notes generator, flashcards, and progress tracking.</p>
+      </div>
+      <div class="project-card">
+        <h3><a href="https://playforge-six.vercel.app">PlayForge</a></h3>
+        <p>A Minecraft/gaming inspired hosting-style dashboard UI.</p>
+      </div>
+      <div class="project-card">
+        <h3><a href="https://bloqhost.vercel.app">BloqHost</a></h3>
+        <p>A hosting dashboard concept project for developers.</p>
+      </div>
+      <div class="project-card">
+        <h3>Portfolio Sites</h3>
+        <p>Several portfolio designs in Flask, React, and HTML/CSS.</p>
+      </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience">
     <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
-    <ul>
-      <li>Exploring programming since 2024 — Python, PHP, HTML/CSS, JS</li>
-      <li>Created <b>TSC Marketplace</b>, a school virtual currency system</li>
-      <li>Built <b>PreX Coins Discord Bot</b> with economy commands</li>
-      <li>Experimenting with <b>Minecraft servers & plugins</b></li>
-    </ul>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>TSC Marketplace</h3>
+        <p>A school virtual currency system built using PHP and MySQL.</p>
+        <p class="date">2024</p>
+      </div>
+      <div class="timeline-item">
+        <h3>PreX Coins Discord Bot</h3>
+        <p>Developed a Discord bot with economy commands using JavaScript.</p>
+        <p class="date">2024</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Minecraft Server Customization</h3>
+        <p>Customized Minecraft servers with plugins like PaperMC and Purpur.</p>
+        <p class="date">2025</p>
+      </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -169,7 +237,7 @@
     </div>
   </section>
 
-  <footer>© 2025 Arnav · Crafted with ❤ + code</footer>
+  <footer>© 2025 arnxv · Crafted with ❤ + code</footer>
 </main>
 
 <script>
@@ -183,15 +251,6 @@
       if (!json.success) return statusText.textContent = "Offline";
       const data = json.data;
       const status = data.discord_status || "offline";
-      let label = status.charAt(0).toUpperCase() + status.slice(1);
-      statusText.textContent = label;
-    } catch (e) {
-      statusText.textContent = "Discord unavailable";
-    }
-  }
-  fetchLanyard();
-  setInterval(fetchLanyard, 15000);
-</script>
-
-</body>
-</html>
+      let label = status.charAt(0).toUpperCase() + status.slice(1
+::contentReference[oaicite:0]{index=0}
+ 
