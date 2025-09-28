@@ -49,17 +49,6 @@
              placeholder="Search Brave …" autocomplete="off" autofocus>
     </form>
 
-    <!-- Spotify & Discord Activities -->
-    <section class="mb-12 max-w-xl mx-auto" data-aos="fade-up">
-      <div class="glass p-6 mb-4">
-        <p id="spotify" class="text-gray-300 text-lg font-medium">🎧 Loading Spotify…</p>
-      </div>
-      <div class="glass p-6">
-        <p class="text-gray-300 font-medium mb-2">Discord Activities:</p>
-        <div id="discordActivities" class="text-gray-300 space-y-1">Loading…</div>
-      </div>
-    </section>
-
     <!-- Quick links -->
     <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up">
       <a href="https://mail.google.com" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
@@ -87,7 +76,19 @@
     </footer>
   </main>
 
-  <!-- AOS + greeting + Lanyard script -->
+  <!-- Sticky Floating Cards -->
+  <!-- Discord: Left Bottom -->
+  <div id="discordActivitiesCard" class="fixed bottom-4 left-4 w-64 glass p-4 hover:scale-105 transition-transform">
+    <p class="text-gray-300 font-medium mb-2">Discord Activities:</p>
+    <div id="discordActivities" class="text-gray-300 space-y-1 max-h-48 overflow-y-auto">Loading…</div>
+  </div>
+
+  <!-- Spotify: Right Bottom -->
+  <div id="spotifyCard" class="fixed bottom-4 right-4 w-64 glass p-4 hover:scale-105 transition-transform">
+    <p id="spotify" class="text-gray-300 font-medium">🎧 Loading Spotify…</p>
+  </div>
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -95,12 +96,12 @@
     // Greeting
     const greet = document.getElementById('greet');
     function tick(){
-      const h=new Date().getHours();
+      const h = new Date().getHours();
       greet.textContent = h<12?'Good morning ☀️':h<18?'Good afternoon 🌤️':'Good evening 🌙';
     }
-    tick(); setInterval(tick,60_000);
+    tick(); setInterval(tick, 60000);
 
-    // Spotify & Discord Activities via Lanyard
+    // Lanyard: Spotify + Discord Activities
     async function loadDiscordData() {
       const userId = "1384352596357021736"; // your Discord ID
       try {
@@ -109,7 +110,6 @@
         const spotifyEl = document.getElementById("spotify");
         const discordEl = document.getElementById("discordActivities");
 
-        // Clear previous
         discordEl.innerHTML = "";
 
         // Spotify
@@ -127,17 +127,13 @@
         // Other Discord activities
         data.data.activities.forEach(act => {
           if (act.type === 2) return; // skip Spotify
-
-          let icon = "";
-          let text = "";
-
+          let icon = "", text = "";
           switch(act.type) {
-            case 0: icon = "🎮"; text = act.name; break; // Playing game
-            case 1: icon = "📺"; text = act.details || act.name; break; // Streaming
-            case 4: icon = "💬"; text = act.state; break; // Custom status
-            default: icon = "🕹️"; text = act.name;
+            case 0: icon="🎮"; text=act.name; break; // Game
+            case 1: icon="📺"; text=act.details || act.name; break; // Streaming
+            case 4: icon="💬"; text=act.state; break; // Custom status
+            default: icon="🕹️"; text=act.name;
           }
-
           const p = document.createElement("p");
           p.innerText = `${icon} ${text}`;
           discordEl.appendChild(p);
@@ -147,7 +143,7 @@
       }
     }
 
-    setInterval(loadDiscordData, 10000); // Refresh every 10s
+    setInterval(loadDiscordData, 10000);
     loadDiscordData();
   </script>
 </body>
