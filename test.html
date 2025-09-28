@@ -1,226 +1,699 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arnav | Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>akk1to — Portfolio</title>
 
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7I6+X7B1m+Yz3ZQf3T9Zc3f1QmD1I8nNq9zU6b6rj1s0M1Q7xJb6dYw2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <meta name="description" content="akk1to — Full-stack developer, Minecraft enthusiast, maker of SentinelsGuard, KingOra, AsakaCloud staff.">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #fdfdfd; color: #222; line-height: 1.6; }
-
-    header {
-      position: fixed; top: 0; width: 100%;
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.8);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; z-index: 1000;
+    /* --------------------------
+       Reset & Base
+       -------------------------- */
+    :root{
+      --bg:#0b0d10;
+      --card:#0f1720;
+      --muted:#98a0a8;
+      --glass: rgba(255,255,255,0.04);
+      --accent-1: #FFD54A; /* warm yellow */
+      --accent-2: #36d399; /* teal/green */
+      --accent-3: #6ee7b7;
+      --glass-2: rgba(255,255,255,0.03);
+      --radius: 14px;
+      --mono: "Roboto Mono", monospace;
+      --uiFont: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    header h1 { font-weight: 700; color: #007aff; }
-    nav a { margin: 0 1rem; text-decoration: none; color: #222; font-weight: 500; }
-    nav a:hover { color: #007aff; }
-
-    section { padding: 6rem 2rem; max-width: 1100px; margin: auto; }
-
-    /* Hero */
-    #hero {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 100vh; text-align: center;
-      background: url('https://img.freepik.com/free-photo/dark-geometric-background-with-copy-space_24972-1816.jpg') center/cover no-repeat;
-      color: white; position: relative;
-    }
-    #hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
-    #hero .content { position: relative; z-index: 1; }
-    #hero h2 { font-size: 3rem; margin-bottom: .5rem; }
-    #hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-    .btn { padding: .8rem 1.5rem; border-radius: 8px; border: none; cursor: pointer;
-      font-size: 1rem; margin: .5rem; transition: all .3s; display: inline-block; }
-    .btn-primary { background: #007aff; color: white; text-decoration: none; }
-    .btn-primary:hover { background: #0051a8; }
-    .btn-secondary { background: white; color: #007aff; border: 1px solid #007aff; text-decoration: none; }
-    .btn-secondary:hover { background: #007aff; color: white; }
-
-    /* Section Titles */
-    #about h2, #projects h2, #experience h2, #contact h2 {
-      font-size: 2rem; margin-bottom: 1rem; color: #007aff;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--uiFont);
+      background: linear-gradient(180deg,#05060a 0%, #071017 35%, #071017 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      scroll-behavior:smooth;
     }
 
-    #about p { max-width: 700px; margin: auto; font-size: 1.1rem; }
+    a{color:inherit}
+    img{display:block;max-width:100%}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px;}
 
-    /* Projects */
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 1.5rem;
+    /* --------------------------
+       Top nav
+       -------------------------- */
+    header.site-header{
+      position:fixed;
+      left:0;right:0;top:14px;
+      z-index:1000;
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
     }
-    .project-card {
-      background: white; border-radius: 12px; padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform .3s;
+    .nav-inner{
+      pointer-events:all;
+      width:calc(100% - 40px);
+      max-width:1200px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;
+      padding:12px 18px;
+      border-radius:999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px) saturate(1.05);
     }
-    .project-card:hover { transform: translateY(-6px); }
-    .project-card h3 { margin-bottom: .5rem; color: #007aff; }
+    .brand{
+      display:flex;gap:12px;align-items:center;
+    }
+    .brand .logo{
+      width:44px;height:44px;border-radius:12px;
+      background: linear-gradient(135deg,var(--accent-2),var(--accent-1));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#041014;font-size:18px;
+      box-shadow: 0 6px 22px rgba(54,211,153,0.08), inset 0 -2px 10px rgba(0,0,0,0.2);
+    }
+    .brand .title{
+      display:flex;flex-direction:column;line-height:1;
+    }
+    .brand .title strong{font-size:15px}
+    .brand .title small{font-size:11px;color:var(--muted);display:block;margin-top:3px}
 
-    /* Experience */
-    .timeline { border-left: 3px solid #007aff; padding-left: 1.5rem; }
-    .timeline-item { margin-bottom: 2rem; }
-    .timeline-item h3 { margin: 0; font-size: 1.2rem; color: #007aff; }
-    .timeline-item span { font-size: 0.9rem; color: #555; }
+    nav.top-nav{display:flex;gap:10px;align-items:center}
+    nav.top-nav a{
+      color: #cfe8f3;
+      padding:8px 12px;border-radius:10px;font-weight:600;font-size:14px;
+      text-decoration:none;
+      transition: all .18s ease;
+    }
+    nav.top-nav a:hover{transform:translateY(-2px);color:#051017;background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));}
+    .cta-resume{
+      padding:8px 12px;border-radius:10px;font-weight:700;background:linear-gradient(90deg,var(--accent-2),var(--accent-1));
+      color:#041014;margin-left:8px;box-shadow:0 8px 30px rgba(54,211,153,0.08);
+    }
+
+    /* --------------------------
+       Hero
+       -------------------------- */
+    .hero{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns: 1fr;
+      align-items:center;
+      padding:120px 0 80px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-bg{
+      position:absolute;inset:0;z-index:0;
+      background-image: radial-gradient(ellipse at 10% 10%, rgba(54,211,153,0.06), transparent 8%),
+                        radial-gradient(ellipse at 90% 80%, rgba(255,213,74,0.04), transparent 12%),
+                        url('https://images.unsplash.com/photo-1503342217505-b0a15a33c68a?auto=format&fit=crop&w=1600&q=60');
+      background-size:cover;background-position:center;
+      filter: blur(10px) saturate(1.02) contrast(.9);
+      transform: scale(1.03);
+      opacity:0.9;
+    }
+    .hero-inner{position:relative;z-index:2;}
+    .hero-grid{display:grid;grid-template-columns: 1fr 420px;gap:32px;align-items:center;}
+    .intro{
+      padding:28px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px);
+      box-shadow: 0 6px 30px rgba(2,6,12,0.65);
+    }
+    .kicker{font-size:13px;color:var(--muted);display:inline-block;margin-bottom:14px;font-weight:600}
+    h1.title{
+      font-size:40px;margin:0 0 12px;line-height:1.04;
+      background: linear-gradient(90deg, #fff, #cfefff 40%, var(--accent-1) 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      font-weight:800;
+    }
+    .subtitle{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:640px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .action-btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;font-weight:700;font-size:14px;
+      background:transparent;border:1px solid rgba(255,255,255,0.03);color:#eaf8ff;cursor:pointer;transition:.18s;
+    }
+    .action-btn.primary{
+      background:linear-gradient(90deg,var(--accent-2),var(--accent-1));color:#041017;border:0;box-shadow:0 10px 30px rgba(54,211,153,0.08)
+    }
+    .action-btn:hover{transform:translateY(-4px)}
+    .profile-card{
+      border-radius:18px;padding:18px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);
+      display:flex;gap:12px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,0.55);
+    }
+    .avatar{
+      width:96px;height:96px;border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,0.04);
+      background:linear-gradient(135deg,#0ea5a8,#ffd54a);
+      display:flex;align-items:center;justify-content:center;font-weight:900;color:#021212;font-size:26px;
+    }
+    .profile-meta{flex:1}
+    .profile-meta h3{margin:0;font-size:18px}
+    .profile-meta p{margin:6px 0;color:var(--muted);font-size:13px}
+    .presence{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .presence .dot{width:10px;height:10px;border-radius:50%}
+
+    /* --------------------------
+       Sections
+       -------------------------- */
+    section.block{padding:80px 0}
+    .section-title{
+      display:flex;align-items:center;gap:12px;margin-bottom:18px;
+    }
+    .section-title h2{font-size:22px;margin:0;color:#eaf8ff}
+    .section-title p.desc{color:var(--muted);font-size:13px;margin:0}
+
+    /* Projects grid cards */
+    .projects-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:18px;
+    }
+    .project{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .25s ease, box-shadow .25s;
+      box-shadow: 0 6px 20px rgba(2,6,12,0.55);
+    }
+    .project:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,12,0.7)}
+    .project h3{font-size:16px;margin-bottom:8px;color:#dbeffe}
+    .project p{color:var(--muted);font-size:13px;margin-bottom:12px}
+    .project .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{font-size:11px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+
+    .project a.link{
+      display:inline-flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;text-decoration:none;font-weight:700;background:linear-gradient(90deg,var(--accent-3),var(--accent-2));color:#021212
+    }
+
+    /* Experience timeline */
+    .timeline{position:relative;padding-left:18px}
+    .timeline:before{
+      content:"";position:absolute;left:6px;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--accent-2),var(--accent-1));border-radius:6px;opacity:.18
+    }
+    .timeline-item{position:relative;padding:18px 12px;margin-bottom:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.02)}
+    .timeline-item .dot{
+      position:absolute;left:-2px;top:20px;width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,var(--accent-2),var(--accent-1));box-shadow:0 6px 18px rgba(255,213,74,0.06)
+    }
+    .timeline-item h4{margin:0 0 6px;font-size:15px;color:#e7fbf3}
+    .timeline-item .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .timeline-item p{color:var(--muted);font-size:14px;margin:0}
+
+    /* Skills */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+    .skill{
+      padding:12px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)
+    }
+    .skill h5{margin:0 0 6px;font-size:14px;color:#e9fbff}
+    .bar{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent-1));width:0%;transition:width 1.2s cubic-bezier(.2,.9,.2,1)}
 
     /* Contact */
-    .contact-links a {
-      display: inline-block; margin: .5rem; text-decoration: none; font-weight: 500;
-      padding: .5rem 1rem; border-radius: 8px; border: 1px solid #007aff;
-      transition: 0.3s; color: #007aff;
-    }
-    .contact-links a:hover { background: #007aff; color: #fff; }
+    .contact-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .contact-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;gap:12px}
+    .contact-card i.fa{font-size:20px;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent-2),var(--accent-1));color:#041212}
 
-    footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #555; }
+    /* Footer */
+    footer.site-footer{padding:40px 0;text-align:center;color:var(--muted);font-size:14px;margin-top:40px}
 
-    /* Discord Status */
-    #discord-status {
-      margin-top: 1rem; padding: 1rem; border-radius: 10px;
-      background: rgba(255,255,255,0.1); display: inline-block;
-      color: white; font-size: 0.9rem;
+    /* Utilities & Responsive */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .center{text-align:center}
+
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns: 1fr}
+      .profile-card{align-items:flex-start}
+      .nav-inner{padding:10px}
+      .brand .title small{display:none}
     }
-    #discord-status i { margin-right: .5rem; }
+    @media (max-width:520px){
+      .brand .title strong{font-size:13px}
+      .action-btn{padding:8px 12px;font-size:13px}
+      .hero{padding-top:80px}
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1><i class="fa-solid fa-code"></i> Arnav</h1>
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- HEADER / NAV -->
+  <header class="site-header">
+    <div class="nav-inner container" role="navigation" aria-label="Main navigation">
+      <div class="brand">
+        <div class="logo">akk</div>
+        <div class="title">
+          <strong>akk1to</strong>
+          <small>Full-stack • Minecraft • AI</small>
+        </div>
+      </div>
+
+      <nav class="top-nav" aria-label="Top links">
+        <a href="#hero">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a class="cta-resume" href="https://akk1to.dev" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section id="hero">
-    <div class="content">
-      <h2>Hi, I’m Arnav</h2>
-      <p>Building digital experiences, bots, and websites.<br>Learning, exploring, and coding the future.</p>
-      <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-laptop-code"></i> View my work</a>
-      <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Get in touch</a>
+  <!-- HERO -->
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
 
-      <!-- Discord Presence -->
-      <div id="discord-status"><i class="fa-brands fa-discord"></i> Loading Discord status...</div>
-    </div>
-  </section>
+      <div class="container hero-inner">
+        <div class="hero-grid">
+          <!-- Left: intro -->
+          <div class="intro" role="region" aria-labelledby="hero-title">
+            <div class="kicker">Hi, I build & operate game systems</div>
+            <h1 id="hero-title" class="title">Lê Anh Tuấn — <span style="background:linear-gradient(90deg,var(--accent-2),var(--accent-1));-webkit-background-clip:text;background-clip:text;color:transparent">akk1to.dev</span></h1>
+            <div class="subtitle">Full-stack developer, Minecraft enthusiast and network admin. I build servers, proxies, dashboards and lightweight anti-DDoS layers — learning every day.</div>
 
-  <!-- About -->
-  <section id="about">
-    <h2><i class="fa-solid fa-user"></i> About Me</h2>
-    <p>
-      I'm Arnav, a 12-year-old beginner programmer from India 🌏.<br>
-      I love working on web development, Discord bots, and fun coding projects.<br>
-      Exploring ethical hacking, anime, and Minecraft server customizations keeps me excited about tech every day.
-    </p>
-  </section>
+            <div class="actions" role="toolbar" aria-label="Primary actions">
+              <a class="action-btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+              <a class="action-btn" href="https://github.com/akk1to" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="action-btn" href="#contact"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+            </div>
 
-  <!-- Projects -->
-<section id="projects">
-  <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
-  <div class="projects-grid">
-    <div class="project-card">
-      <h3>Personalized Dashboard</h3>
-      <p>A React-based dashboard with weather, news, to-do list, and quotes.</p>
-    </div>
+            <!-- Quick badges -->
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+              <div class="pill">🇻🇳 Vietnam</div>
+              <div class="pill">16 years old</div>
+              <div class="pill">Available for work</div>
+              <div class="pill">Java • Node • Next • Velocity</div>
+            </div>
 
-    <div class="project-card">
-      <h3><a href="https://gradify-ten.vercel.app" target="_blank">Gradify</a></h3>
-      <p>A tool for students with notes generator, flashcards, and progress tracking.</p>
-    </div>
+            <!-- Discord Presence quick -->
+            <div id="discord-block" style="margin-top:14px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div id="discord-badge" style="padding:8px 12px;border-radius:12px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:10px;">
+                  <i class="fa-brands fa-discord" style="font-size:16px;color:#7289DA"></i>
+                  <div>
+                    <div id="discord-status-line" style="font-weight:700">Discord: <span class="muted small">loading...</span></div>
+                    <div id="discord-activity" class="muted small" style="margin-top:3px"></div>
+                  </div>
+                </div>
 
-    <div class="project-card">
-      <h3><a href="https://playforge-six.vercel.com" target="_blank">PlayForge</a></h3>
-      <p>PlayForge is a modern gaming hub showcasing top games and real-time news. A personal project for frontend and API practice, not affiliated with any company.</p>
-    </div>
+                <div style="font-size:13px;color:var(--muted);">Tip: set your Discord ID in the script to enable live presence display.</div>
+              </div>
+            </div>
 
-    <div class="project-card">
-      <h3><a href="https://bloqhost.vercel.app" target="_blank">BloqHost</a></h3>
-      <p>A hosting project with simple, modern UI for developers and learners.</p>
-    </div>
+          </div>
 
-    <div class="project-card">
-      <h3>Portfolio Sites</h3>
-      <p>Several personal portfolio designs in Flask, React, and static HTML/CSS.</p>
-    </div>
-  </div>
-</section>
+          <!-- Right: profile card -->
+          <aside class="profile-card" aria-label="Profile card">
+            <div class="avatar" aria-hidden="true">
+              <!-- image fallback: you can replace with your /logo.jpg -->
+              <img src="/logo.jpg?height=200&width=200" alt="akk1to logo" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.style.display='none';this.parentNode.textContent='AT'">
+            </div>
+            <div class="profile-meta">
+              <h3>Lê Anh Tuấn (akk1to)</h3>
+              <p class="muted small">Full-stack Developer • Minecraft • Server Admin</p>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <a class="action-btn" href="https://github.com/akk1to" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a class="action-btn" href="https://discord.gg/kingora" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+              </div>
 
+              <div class="presence" style="margin-top:12px">
+                <div class="dot" style="background:linear-gradient(90deg,var(--accent-2),var(--accent-1));box-shadow:0 6px 18px rgba(255,213,74,0.06)"></div>
+                <div class="small muted">Admin of KingOra Network • Official staff at AsakaCloud</div>
+              </div>
 
-  <!-- Experience -->
-  <section id="experience">
-    <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Student Developer</h3><span>2023 - Present</span>
-        <p>Exploring web development, ethical hacking, and bot development while learning Python, PHP, and JavaScript.</p>
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                <a class="pill" href="https://kingora.net" target="_blank" rel="noopener">kingora.net</a>
+                <a class="pill" href="https://asakacloud.vn" target="_blank" rel="noopener">asakacloud.vn</a>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
-      <div class="timeline-item">
-        <h3>Discord Bot Developer</h3><span>2024 - Present</span>
-        <p>Created economy bots like PreX Coins (archived now) with shop, inventory, games, and advanced features.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="block">
+      <div class="container">
+        <div class="section-title">
+          <h2><i class="fa-solid fa-diagram-project" style="width:18px"></i>&nbsp;Featured Projects</h2>
+          <p class="desc muted">A selection of projects I built — servers, dashboards, proxies and tools.</p>
+        </div>
+
+        <div class="projects-grid" role="list">
+          <!-- Project: SentinelsGuard -->
+          <article class="project" role="listitem" aria-labelledby="proj-sentinel">
+            <h3 id="proj-sentinel">SentinelsGuard</h3>
+            <p>Portable, lightweight layer 7 &amp; 4 anti-DDoS proxy for Minecraft (Velocity). Modern design and minimal footprint for proxies.</p>
+            <div class="tags" style="margin:12px 0">
+              <span class="pill">Java</span><span class="pill">Minecraft</span><span class="pill">Velocity</span><span class="pill">Proxy</span>
+            </div>
+            <a class="link" href="https://github.com/Khoasoma/SentinelProxy" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View code</a>
+          </article>
+
+          <!-- Project: BusinessManager -->
+          <article class="project" role="listitem" aria-labelledby="proj-business">
+            <h3 id="proj-business"><a href="https://github.com/akk1to" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">BusinessManager</a></h3>
+            <p>All-in-one dashboard to manage business operations — DB integrations, analytics and admin dashboard (Node.js / Next.js).</p>
+            <div style="margin:12px 0" class="tags"><span class="pill">Node.js</span><span class="pill">Next.js</span><span class="pill">Dashboard</span></div>
+            <a class="link" href="https://merryhome-dashboard-ui.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> Live demo</a>
+          </article>
+
+          <!-- Project: PlayForge -->
+          <article class="project" role="listitem" aria-labelledby="proj-playforge">
+            <h3 id="proj-playforge"><a href="https://playforge-six.vercel.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">PlayForge</a></h3>
+            <p>Gaming hub front-end and API practice project — showcases games, news and community features.</p>
+            <div style="margin:12px 0" class="tags"><span class="pill">Frontend</span><span class="pill">APIs</span><span class="pill">Games</span></div>
+            <a class="link" href="https://playforge-six.vercel.com" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> Visit</a>
+          </article>
+
+          <!-- Project: BloqHost -->
+          <article class="project" role="listitem" aria-labelledby="proj-bloqhost">
+            <h3 id="proj-bloqhost"><a href="https://bloqhost.vercel.app" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">BloqHost</a></h3>
+            <p>Simple host panel and marketing site — fast, modern, focused on developer UX.</p>
+            <div style="margin:12px 0" class="tags"><span class="pill">Hosting</span><span class="pill">UI</span></div>
+            <a class="link" href="https://bloqhost.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-server"></i> Open</a>
+          </article>
+
+          <!-- Project: Hungg's Basement -->
+          <article class="project" role="listitem" aria-labelledby="proj-hungg">
+            <h3 id="proj-hungg">Hungg's Basement</h3>
+            <p>Giveaway & community support for HunggVN — worked as Giveaway Staff and community organizer.</p>
+            <div style="margin:12px 0" class="tags"><span class="pill">Community</span><span class="pill">Staff</span></div>
+            <a class="link" href="https://discord.gg/hunggvn" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+          </article>
+
+          <!-- Project: Portfolio Sites -->
+          <article class="project" role="listitem" aria-labelledby="proj-portfolio">
+            <h3 id="proj-portfolio">Portfolio Sites</h3>
+            <p>Multiple personal portfolios built with static HTML, React and Flask. Clean, responsive and fast.</p>
+            <div style="margin:12px 0" class="tags"><span class="pill">HTML</span><span class="pill">React</span><span class="pill">Flask</span></div>
+            <a class="link" href="https://github.com/akk1to" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Repo</a>
+          </article>
+        </div>
       </div>
-      <div class="timeline-item">
-        <h3>Web Projects</h3><span>2024 - Present</span>
-        <p>Built multiple dynamic websites using Flask, Node.js, and React including hosting dashboards and personal sites.</p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="block" aria-labelledby="exp-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="exp-title"><i class="fa-solid fa-briefcase"></i>&nbsp;Work Experience</h2>
+          <p class="desc muted">Roles, staff positions and community projects I've been part of.</p>
+        </div>
+
+        <div class="timeline" aria-hidden="false">
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <h4>Studying high school</h4>
+            <div class="meta">Ben Cat High School &nbsp;•&nbsp; 2024 - 2026</div>
+            <p>Currently a high school student and a member of the school's IT team — I handle basic admin tasks and learn on the job.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <h4>Working on my own project</h4>
+            <div class="meta">akk1to's GitHub &nbsp;•&nbsp; 2021 - Present</div>
+            <p>My goal is to develop and launch numerous projects to accelerate learning and expertise: proxies, servers, dashboards, and developer tools.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <h4>Supporter (AsakaCloud)</h4>
+            <div class="meta">AsakaCloud &nbsp;•&nbsp; 2025 - Present</div>
+            <p>Official supporter and staff member — assisting with community, support, and server operations.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <h4>Making my own community</h4>
+            <div class="meta">KingOra Network &nbsp;•&nbsp; 2025 - Present</div>
+            <p>Building KingOra — a Minecraft community and network with an aim to become a large server network.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2><i class="fa-solid fa-address-book"></i> Contact</h2>
-    <p>You can reach out to me via:</p>
-    <div class="contact-links">
-      <a href="https://github.com/arnxv-coder" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-      <a href="mailto:me@arnxv.is-a.dev"><i class="fa-solid fa-envelope"></i> Email</a>
-      <a href="https://discord.com/users/1384352596357021736" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-      <a href="https://instagram.com/arnx.kxd" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
-    </div>
-  </section>
+    <!-- SKILLS -->
+    <section id="skills" class="block" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="skills-title"><i class="fa-solid fa-code"></i>&nbsp;Skills & Tools</h2>
+          <p class="desc muted">Languages, frameworks and tools I use often.</p>
+        </div>
 
-  <footer>
-    Not© 2025 Arnav | Made with ❤️ + code
-  </footer>
+        <div class="skills-grid">
+          <div class="skill">
+            <h5>HTML / CSS</h5>
+            <div class="bar"><i style="width:85%"></i></div>
+            <div class="small muted" style="margin-top:8px">Modern layouts, responsive and accessible UIs</div>
+          </div>
+          <div class="skill">
+            <h5>JavaScript</h5>
+            <div class="bar"><i style="width:78%"></i></div>
+            <div class="small muted" style="margin-top:8px">Node.js, tooling, browser interactivity</div>
+          </div>
+          <div class="skill">
+            <h5>React / Next.js</h5>
+            <div class="bar"><i style="width:72%"></i></div>
+            <div class="small muted" style="margin-top:8px">SPA & SSR experiences</div>
+          </div>
+          <div class="skill">
+            <h5>Java</h5>
+            <div class="bar"><i style="width:60%"></i></div>
+            <div class="small muted" style="margin-top:8px">Minecraft-related plugins, proxies</div>
+          </div>
+          <div class="skill">
+            <h5>C++</h5>
+            <div class="bar"><i style="width:70%"></i></div>
+            <div class="small muted" style="margin-top:8px">Performance-focused components</div>
+          </div>
+          <div class="skill">
+            <h5>Databases & Docker</h5>
+            <div class="bar"><i style="width:68%"></i></div>
+            <div class="small muted" style="margin-top:8px">MySQL/Postgres, container workflows</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Discord Presence Script -->
+    <!-- CONTACT -->
+    <section id="contact" class="block" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="contact-title"><i class="fa-solid fa-address-book"></i>&nbsp;Get In Touch</h2>
+          <p class="desc muted">Open to freelance and full-time opportunities. Reach me here:</p>
+        </div>
+
+        <div class="contact-cards" role="list">
+          <div class="contact-card" role="listitem">
+            <i class="fa-brands fa-github"></i>
+            <div>
+              <div style="font-weight:700">GitHub</div>
+              <div class="small muted"><a href="https://github.com/akk1to" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">github.com/akk1to</a></div>
+            </div>
+          </div>
+
+          <div class="contact-card" role="listitem">
+            <i class="fa-brands fa-linkedin"></i>
+            <div>
+              <div style="font-weight:700">LinkedIn</div>
+              <div class="small muted">linkedin.com/in/akk1to</div>
+            </div>
+          </div>
+
+          <div class="contact-card" role="listitem">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <div style="font-weight:700">Email</div>
+              <div class="small muted"><a id="mail-link" href="mailto:contact@akk1to.dev" style="color:inherit;text-decoration:none">contact@akk1to.dev</a></div>
+            </div>
+          </div>
+
+          <div class="contact-card" role="listitem">
+            <i class="fa-brands fa-discord"></i>
+            <div>
+              <div style="font-weight:700">Discord</div>
+              <div class="small muted"><a href="https://discord.gg/kingora" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Join KingOra</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;max-width:680px;">
+          <form id="contact-form" onsubmit="return false;">
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <input id="c-name" placeholder="Your name" style="flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:#041017;color:#e9fbff" />
+              <input id="c-email" placeholder="Your email" style="flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:#041017;color:#e9fbff" />
+            </div>
+            <textarea id="c-msg" placeholder="Message" style="width:100%;margin-top:10px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:#041017;color:#e9fbff;min-height:120px"></textarea>
+            <div style="margin-top:10px;display:flex;gap:10px">
+              <button class="action-btn primary" onclick="sendContact()">Send Message</button>
+              <button class="action-btn" onclick="document.getElementById('c-name').value='';document.getElementById('c-email').value='';document.getElementById('c-msg').value='';">Clear</button>
+            </div>
+            <div id="contact-result" style="margin-top:10px;color:var(--accent-1);font-weight:700"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container center">
+        <div style="margin-bottom:10px">© 2025 <strong>akk1to</strong> — built with curiosity &amp; code</div>
+        <div class="muted small">Want this design customised? Replace images, update links, or change the Discord ID in the script.</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- SCRIPTS -->
   <script>
-    const userId = "1384352596357021736"; // your Discord user ID
-    const statusDiv = document.getElementById("discord-status");
+    /* ============================
+       Small helper utilities
+       ============================ */
+    function el(q){return document.querySelector(q)}
+    function els(q){return Array.from(document.querySelectorAll(q))}
 
-    async function fetchPresence() {
-      try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-        const data = await res.json();
-        if (data.success) {
-          const { discord_status, activities } = data.data;
-          const statusIcons = {
-            online: '<i class="fa-solid fa-circle text-green"></i> Online',
-            idle: '<i class="fa-solid fa-circle text-yellow"></i> Idle',
-            dnd: '<i class="fa-solid fa-circle text-red"></i> Do Not Disturb',
-            offline: '<i class="fa-regular fa-circle"></i> Offline'
-          };
-          let activity = activities[0] ? ` - ${activities[0].name}` : '';
-          statusDiv.innerHTML = `<i class="fa-brands fa-discord"></i> ${statusIcons[discord_status] || "Unknown"}${activity}`;
-        } else {
-          statusDiv.innerHTML = "<i class='fa-brands fa-discord'></i> Couldn't fetch status";
+    // Smooth in-view animations (fade & slide)
+    const reveals = (()=>{
+      const opts = {threshold: 0.08};
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.style.transition = "opacity .8s cubic-bezier(.2,.9,.2,1), transform .8s cubic-bezier(.2,.9,.2,1)";
+            e.target.style.opacity = 1;
+            e.target.style.transform = "translateY(0px) scale(1)";
+            io.unobserve(e.target);
+          }
+        });
+      }, opts);
+      return {
+        observe: (selector, delay=0)=>{
+          els(selector).forEach((el, i)=>{
+            el.style.opacity = 0;
+            el.style.transform = "translateY(14px) scale(.995)";
+            setTimeout(()=>io.observe(el), i*80 + delay)
+          })
         }
-      } catch {
-        statusDiv.innerHTML = "<i class='fa-brands fa-discord'></i> Error loading Discord status";
       }
+    })();
+
+    // Animate skill bars once visible
+    function animateSkillBars(){
+      els('.bar > i').forEach(bar=>{
+        const w = bar.style.width || '0%';
+        bar.style.width = '0%';
+        const intended = w;
+        setTimeout(()=>bar.style.width = intended, 240);
+      });
     }
 
-    fetchPresence();
-    setInterval(fetchPresence, 15000); // update every 15s
-  </script>
+    // Observe the skills section
+    const skillsObserver = new IntersectionObserver((entries)=>{
+      if(entries.some(e=>e.isIntersecting)){
+        animateSkillBars();
+        skillsObserver.disconnect();
+      }
+    }, {threshold: 0.15});
+    const skillsEl = el('#skills');
+    if(skillsEl) skillsObserver.observe(skillsEl);
 
+    // Reveal main sections
+    document.addEventListener('DOMContentLoaded', ()=> {
+      reveals.observe('.intro', 40);
+      reveals.observe('.profile-card', 40);
+      reveals.observe('.project', 60);
+      reveals.observe('.timeline-item', 80);
+      reveals.observe('.skill', 100);
+      reveals.observe('.contact-card', 120);
+    });
+
+    // Minimal "send message" simulation (no backend)
+    function sendContact(){
+      const name = el('#c-name').value.trim();
+      const email = el('#c-email').value.trim();
+      const msg = el('#c-msg').value.trim();
+      const out = el('#contact-result');
+      if(!name || !email || !msg){
+        out.style.color = "#ff9d9d";
+        out.textContent = "Please fill all fields.";
+        return;
+      }
+      // simulate sending
+      out.style.color = "var(--accent-1)";
+      out.textContent = "Message sent — thank you! (This demo doesn't post to a server)";
+      setTimeout(()=>{out.textContent='';},4000);
+      el('#c-name').value='';el('#c-email').value='';el('#c-msg').value='';
+    }
+
+    /* ============================
+       Discord presence via Lanyard (optional)
+       - Replace userId with your Discord user ID to enable
+       - If you don't want presence, leave userId empty
+       ============================ */
+    (async function discordPresence(){
+      const userId = ""; // <-- PUT YOUR DISCORD USER ID HERE (e.g. "123456789012345678")
+      const statusLine = el('#discord-status-line');
+      const activityLine = el('#discord-activity');
+
+      if(!userId){
+        statusLine.innerHTML = 'Discord: <span class="muted small">(set userId in script to show presence)</span>';
+        activityLine.innerHTML = '';
+        return;
+      }
+
+      async function fetchStatus(){
+        try{
+          const r = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+          if(!r.ok) throw new Error('network');
+          const j = await r.json();
+          if(!j.success) throw new Error('no-data');
+
+          const data = j.data;
+          const s = data.discord_status || 'offline';
+          const statusMap = {
+            online: '<span style="color:#60d394">● Online</span>',
+            idle: '<span style="color:#ffb020">● Idle</span>',
+            dnd: '<span style="color:#ff7b7b">● Do not disturb</span>',
+            offline: '<span style="color:#9aa6b2">● Offline</span>'
+          };
+          const statusText = statusMap[s] || s;
+          statusLine.innerHTML = `Discord: ${statusText} <span class="muted small">• ${data.discord_user?.username ?? ''}</span>`;
+
+          // Display activity if available
+          const act = (data.activities && data.activities.length) ? data.activities[0] : null;
+          if(act){
+            const name = act.name || '';
+            const details = act.details ? ` — ${act.details}` : '';
+            activityLine.innerHTML = `<span style="color:var(--muted)">${name}${details}</span>`;
+          }else{
+            activityLine.innerHTML = `<span class="muted">No activity</span>`;
+          }
+        }catch(err){
+          statusLine.innerHTML = 'Discord: <span class="muted small">unavailable</span>';
+          activityLine.innerHTML = '';
+        }
+      }
+
+      await fetchStatus();
+      setInterval(fetchStatus, 15000);
+    })();
+
+    // Back-to-top on double-click of logo
+    el('.logo').addEventListener('dblclick', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Fix for project anchor links: remove default underline on visited
+    // (ensures project anchors look consistent)
+    (function fixProjectLinks(){
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .project a { text-decoration:none; color:inherit }
+        .project a:visited { color:inherit; text-decoration:none }
+      `;
+      document.head.appendChild(style);
+    })();
+
+  </script>
 </body>
 </html>
