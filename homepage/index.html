@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>homepage | arnxv</title>
+  <title>homepage | arnxv</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml"
@@ -28,7 +28,8 @@
     @keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .typewriter{overflow:hidden;white-space:nowrap;border-right:2px solid var(--brand);
       animation:typing 3s steps(30,end),blink .75s step-end infinite;}
-    @keyframes typing{from{width:0}to{width:100%}} @keyframes blink{50%{border-color:transparent}}
+    @keyframes typing{from{width:0}to{width:100%}} 
+    @keyframes blink{50%{border-color:transparent}}
     .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
       backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.25);}
   </style>
@@ -38,23 +39,29 @@
   <main class="w-full max-w-5xl px-4 py-10">
     <header class="text-center mb-14" data-aos="fade-up">
       <h1 class="text-6xl font-bold text-[var(--brand)] mb-2">arnxv</h1>
-      <p class="text-xl text-gray-300 typewriter">Brave Start‑Page • Made by arnxv</p>
+      <p class="text-xl text-gray-300 typewriter">Brave Start‑Page • Made by arnxv</p>
       <p id="greet" class="text-lg text-gray-400 mt-3"></p>
     </header>
 
     <!-- Brave Search -->
-    <form id="searchForm"
-          action="https://search.brave.com/search"
-          class="mb-12 max-w-xl mx-auto" data-aos="fade-up">
-      <input name="q"
-             class="w-full glass rounded-xl px-4 py-3 text-gray-100 placeholder-gray-400 focus:outline-none"
-             placeholder="Search Brave …"
-             autocomplete="off" autofocus>
+    <form id="searchForm" action="https://search.brave.com/search" class="mb-12 max-w-xl mx-auto" data-aos="fade-up">
+      <input name="q" class="w-full glass rounded-xl px-4 py-3 text-gray-100 placeholder-gray-400 focus:outline-none"
+             placeholder="Search Brave …" autocomplete="off" autofocus>
     </form>
+
+    <!-- Spotify & Discord Activities -->
+    <section class="mb-12 max-w-xl mx-auto" data-aos="fade-up">
+      <div class="glass p-6 mb-4">
+        <p id="spotify" class="text-gray-300 text-lg font-medium">🎧 Loading Spotify…</p>
+      </div>
+      <div class="glass p-6">
+        <p class="text-gray-300 font-medium mb-2">Discord Activities:</p>
+        <div id="discordActivities" class="text-gray-300 space-y-1">Loading…</div>
+      </div>
+    </section>
 
     <!-- Quick links -->
     <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up">
-      <!-- … link cards unchanged … -->
       <a href="https://mail.google.com" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
         <i class="fas fa-envelope text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">Gmail</span>
       </a>
@@ -65,31 +72,83 @@
         <i class="fas fa-robot text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">ChatGPT</span>
       </a>
       <a href="https://prex.bot.nu" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
-        <i class="fas fa-coins text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">PreX Bot</span>
+        <i class="fas fa-coins text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">PreX Bot</span>
       </a>
       <a href="https://kind-nodes.arnxv.is-a.dev" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
         <i class="fas fa-server text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">KindNodes</span>
       </a>
       <a href="https://discord.com/users/1384352596357021736" class="glass rounded-xl p-6 flex items-center gap-4 hover:shadow-xl transition">
-        <i class="fab fa-discord text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">Discord Profile</span>
+        <i class="fab fa-discord text-2xl text-[var(--brand)]"></i><span class="text-lg font-medium">Discord Profile</span>
       </a>
     </section>
 
     <footer class="mt-16 text-center text-sm text-gray-500" data-aos="fade-up">
-      made by arnxv homepage | © 2025
+      made by arnxv homepage | © 2025
     </footer>
   </main>
 
-  <!-- AOS + greeting -->
+  <!-- AOS + greeting + Lanyard script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
+
+    // Greeting
     const greet = document.getElementById('greet');
     function tick(){
       const h=new Date().getHours();
-      greet.textContent = h<12?'Good morning ☀️':h<18?'Good afternoon 🌤️':'Good evening 🌙';
+      greet.textContent = h<12?'Good morning ☀️':h<18?'Good afternoon 🌤️':'Good evening 🌙';
     }
     tick(); setInterval(tick,60_000);
+
+    // Spotify & Discord Activities via Lanyard
+    async function loadDiscordData() {
+      const userId = "1384352596357021736"; // your Discord ID
+      try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const data = await res.json();
+        const spotifyEl = document.getElementById("spotify");
+        const discordEl = document.getElementById("discordActivities");
+
+        // Clear previous
+        discordEl.innerHTML = "";
+
+        // Spotify
+        if (data.data.spotify) {
+          const { song, artist, album_art_url } = data.data.spotify;
+          spotifyEl.innerHTML = `
+            🎧 Now Playing: <strong>${song}</strong> - ${artist}
+            <br>
+            <img src="${album_art_url}" width="64" height="64" style="border-radius:8px;margin-top:5px;">
+          `;
+        } else {
+          spotifyEl.textContent = "🎧 Not playing anything";
+        }
+
+        // Other Discord activities
+        data.data.activities.forEach(act => {
+          if (act.type === 2) return; // skip Spotify
+
+          let icon = "";
+          let text = "";
+
+          switch(act.type) {
+            case 0: icon = "🎮"; text = act.name; break; // Playing game
+            case 1: icon = "📺"; text = act.details || act.name; break; // Streaming
+            case 4: icon = "💬"; text = act.state; break; // Custom status
+            default: icon = "🕹️"; text = act.name;
+          }
+
+          const p = document.createElement("p");
+          p.innerText = `${icon} ${text}`;
+          discordEl.appendChild(p);
+        });
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    setInterval(loadDiscordData, 10000); // Refresh every 10s
+    loadDiscordData();
   </script>
 </body>
 </html>
