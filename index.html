@@ -1,20 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>arnxv — Portfolio</title>
-
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arnav's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#0b0b0c;
-      --card:#0f1720;
-      --muted:#9aa3af;
-      --accent-from: #3ee6ff; /* calm cyan */
+    :root {
+      --bg: #0b0b0c;
+      --card: #0f1720;
+      --muted: #9aa3af;
+      --accent-from: #3ee6ff;
       --accent-to: #ffffff;
       --glass-border: rgba(255,255,255,0.04);
       --radius: 14px;
@@ -22,34 +19,101 @@
       --text: #e6eef8;
       --subtext: #a8b3c3;
     }
-    html,body{
+    html, body {
       background: linear-gradient(180deg, #05060a 0%, #071018 100%);
-      color:var(--text);
-      font-family: 'Inter', system-ui;
-      margin:0; line-height:1.45;
-      scroll-behavior:smooth;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      line-height: 1.45;
+      scroll-behavior: smooth;
     }
-    /* Reusing styles from your given template — trimmed for brevity */
-    header{position:fixed;top:12px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1.25rem;width:calc(100% - 48px);margin:0 auto;max-width:var(--max-w);border-radius:999px;background:rgba(255,255,255,0.02);backdrop-filter:blur(8px);}
-    nav a{color:var(--subtext);margin-left:14px;text-decoration:none;font-weight:600;}
-    nav a:hover{color:var(--accent-from);}
-    .container{max-width:var(--max-w);margin:0 auto;padding:2rem;}
-    .hero{min-height:100vh;display:flex;align-items:center;gap:2.5rem;padding-top:88px;}
-    .hero h2{font-size:clamp(30px,6vw,56px);font-weight:800;}
-    .hero h2 .accent{background:linear-gradient(90deg,var(--accent-from),var(--accent-to));-webkit-background-clip:text;color:transparent;}
-    .button{padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;}
-    .button.primary{background:linear-gradient(90deg,var(--accent-from),var(--accent-to));color:#061018;}
-    .chip{padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.05);color:var(--text);text-decoration:none;display:inline-flex;gap:10px;}
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
-    .project-card{background:rgba(255,255,255,0.05);padding:18px;border-radius:12px;}
-    footer{text-align:center;padding:36px 12px;color:var(--subtext);}
+    header {
+      position: fixed;
+      top: 12px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.25rem;
+      width: calc(100% - 48px);
+      margin: 0 auto;
+      max-width: var(--max-w);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: var(--subtext);
+      margin-left: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: var(--accent-from);
+    }
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      padding-top: 88px;
+    }
+    .hero h2 {
+      font-size: clamp(30px, 6vw, 56px);
+      font-weight: 800;
+    }
+    .hero h2 .accent {
+      background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .button {
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .button.primary {
+      background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+      color: #061018;
+    }
+    .chip {
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      gap: 10px;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      padding: 18px;
+      border-radius: 12px;
+    }
+    footer {
+      text-align: center;
+      padding: 36px 12px;
+      color: var(--subtext);
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <h1 style="margin:0;font-weight:800;background:linear-gradient(90deg,var(--accent-from),var(--accent-to));-webkit-background-clip:text;color:transparent;">arnxv</h1>
+    <h1 style="margin: 0; font-weight: 800; background: linear-gradient(90deg, var(--accent-from), var(--accent-to)); -webkit-background-clip: text; color: transparent;">Arnav</h1>
   </div>
   <nav>
     <a href="#hero">Home</a>
@@ -65,8 +129,7 @@
     <div>
       <h2>Hi — I'm <span class="accent">Arnav</span></h2>
       <p class="lead">12-year-old beginner programmer from India 🇮🇳. I explore web development, Discord bots, ethical hacking basics, and Minecraft server customization. Currently learning and building cool projects for fun.</p>
-
-      <div style="margin:16px 0;">
+      <div style="margin: 16px 0;">
         <a class="button primary" href="#projects">View my work</a>
         <a class="chip" id="discord-status"><i class="fa-brands fa-discord"></i><span id="discord-text">Checking Discord...</span></a>
       </div>
@@ -106,24 +169,23 @@
     </div>
   </section>
 
-  <footer>© 2025 arnxv · Crafted with ❤ + code</footer>
+  <footer>© 2025 Arnav · Crafted with ❤ + code</footer>
 </main>
 
 <script>
-  // Replace with your Discord User ID
-  const userId = "1384352596357021736";
+  const userId = "YOUR_DISCORD_USER_ID";
   const statusText = document.getElementById("discord-text");
 
-  async function fetchLanyard(){
-    try{
+  async function fetchLanyard() {
+    try {
       const res = await fetch("https://api.lanyard.rest/v1/users/" + userId);
       const json = await res.json();
-      if(!json.success) return statusText.textContent = "Offline";
+      if (!json.success) return statusText.textContent = "Offline";
       const data = json.data;
       const status = data.discord_status || "offline";
       let label = status.charAt(0).toUpperCase() + status.slice(1);
       statusText.textContent = label;
-    }catch(e){
+    } catch (e) {
       statusText.textContent = "Discord unavailable";
     }
   }
