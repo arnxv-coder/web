@@ -1,240 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arnav | Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>arnxv — Portfolio</title>
 
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #fdfdfd; color: #222; line-height: 1.6; }
-
-    header {
-      position: fixed; top: 0; width: 100%;
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.8);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; z-index: 1000;
+    :root{
+      --bg:#0b0b0c;
+      --card:#0f1720;
+      --muted:#9aa3af;
+      --accent-from: #3ee6ff; /* calm cyan */
+      --accent-to: #ffffff;
+      --glass-border: rgba(255,255,255,0.04);
+      --radius: 14px;
+      --max-w: 1100px;
+      --text: #e6eef8;
+      --subtext: #a8b3c3;
     }
-    header h1 { font-weight: 700; color: #007aff; }
-    nav a { margin: 0 1rem; text-decoration: none; color: #222; font-weight: 500; }
-    nav a:hover { color: #007aff; }
-
-    section { padding: 6rem 2rem; max-width: 1100px; margin: auto; }
-
-    /* Hero */
-    #hero {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 100vh; text-align: center;
-      background: url('https://img.freepik.com/free-photo/dark-geometric-background-with-copy-space_24972-1816.jpg') center/cover no-repeat;
-      color: white; position: relative;
+    html,body{
+      background: linear-gradient(180deg, #05060a 0%, #071018 100%);
+      color:var(--text);
+      font-family: 'Inter', system-ui;
+      margin:0; line-height:1.45;
+      scroll-behavior:smooth;
     }
-    #hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
-    #hero .content { position: relative; z-index: 1; }
-    #hero h2 { font-size: 3rem; margin-bottom: .5rem; }
-    #hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-    .btn { padding: .8rem 1.5rem; border-radius: 8px; border: none; cursor: pointer;
-      font-size: 1rem; margin: .5rem; transition: all .3s; display: inline-block; }
-    .btn-primary { background: #007aff; color: white; text-decoration: none; }
-    .btn-primary:hover { background: #0051a8; }
-    .btn-secondary { background: white; color: #007aff; border: 1px solid #007aff; text-decoration: none; }
-    .btn-secondary:hover { background: #007aff; color: white; }
-
-    /* Section Titles */
-    #about h2, #projects h2, #experience h2, #contact h2 {
-      font-size: 2rem; margin-bottom: 1rem; color: #007aff; text-decoration: none;
-    }
-
-    #about p { max-width: 700px; margin: auto; font-size: 1.1rem; }
-
-   /* Projects */
-.projects-grid {
-  display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  gap: 1.5rem;
-}
-.project-card {
-  background: white; border-radius: 12px; padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform .3s;
-  text-decoration: none;
-}
-.project-card:hover { transform: translateY(-6px); }
-.project-card h3 { margin-bottom: .5rem; color: #007aff; }
-
-/* Fix links inside project titles */
-.project-card h3 a {
-  text-decoration: none;
-  color: #007aff;
-  transition: color 0.3s;
-}
-
-.project-card h3 a:hover {
-  color: #0051a8;
-}
-
-
-    /* Experience */
-    .timeline { border-left: 3px solid #007aff; padding-left: 1.5rem; }
-    .timeline-item { margin-bottom: 2rem; }
-    .timeline-item h3 { margin: 0; font-size: 1.2rem; color: #007aff; }
-    .timeline-item span { font-size: 0.9rem; color: #555; }
-
-    /* Contact */
-    .contact-links a {
-      display: inline-block; margin: .5rem; text-decoration: none; font-weight: 500;
-      padding: .5rem 1rem; border-radius: 8px; border: 1px solid #007aff;
-      transition: 0.3s; color: #007aff;
-    }
-    .contact-links a:hover { background: #007aff; color: #fff; }
-
-    footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #555; }
-
-    /* Discord Status */
-    #discord-status {
-      margin-top: 1rem; padding: 1rem; border-radius: 10px;
-      background: rgba(255,255,255,0.1); display: inline-block;
-      color: white; font-size: 0.9rem;
-    }
-    #discord-status i { margin-right: .5rem; }
+    /* Reusing styles from your given template — trimmed for brevity */
+    header{position:fixed;top:12px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1.25rem;width:calc(100% - 48px);margin:0 auto;max-width:var(--max-w);border-radius:999px;background:rgba(255,255,255,0.02);backdrop-filter:blur(8px);}
+    nav a{color:var(--subtext);margin-left:14px;text-decoration:none;font-weight:600;}
+    nav a:hover{color:var(--accent-from);}
+    .container{max-width:var(--max-w);margin:0 auto;padding:2rem;}
+    .hero{min-height:100vh;display:flex;align-items:center;gap:2.5rem;padding-top:88px;}
+    .hero h2{font-size:clamp(30px,6vw,56px);font-weight:800;}
+    .hero h2 .accent{background:linear-gradient(90deg,var(--accent-from),var(--accent-to));-webkit-background-clip:text;color:transparent;}
+    .button{padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;}
+    .button.primary{background:linear-gradient(90deg,var(--accent-from),var(--accent-to));color:#061018;}
+    .chip{padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.05);color:var(--text);text-decoration:none;display:inline-flex;gap:10px;}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .project-card{background:rgba(255,255,255,0.05);padding:18px;border-radius:12px;}
+    footer{text-align:center;padding:36px 12px;color:var(--subtext);}
   </style>
 </head>
 <body>
 
-  <header>
-    <h1><i class="fa-solid fa-code"></i> Arnav</h1>
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-      <a href="https://arnxv.is-a.dev/old">Old Portfolio</a>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section id="hero">
-    <div class="content">
-      <h2>Hi, I’m Arnav</h2>
-      <p>Building digital experiences, bots, and websites.<br>Learning, exploring, and coding the future.</p>
-      <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-laptop-code"></i> View my work</a>
-      <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Get in touch</a>
-
-      <!-- Discord Presence -->
-      <div id="discord-status"><i class="fa-brands fa-discord"></i> Loading Discord status...</div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <h2><i class="fa-solid fa-user"></i> About Me</h2>
-    <p>
-      I'm Arnav, a 12-year-old beginner programmer from India 🌏.<br>
-      I love working on web development, Discord bots, and fun coding projects.<br>
-      Exploring ethical hacking, anime, and Minecraft server customizations keeps me excited about tech every day.
-    </p>
-  </section>
-
-  <!-- Projects -->
-<section id="projects">
-  <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
-  <div class="projects-grid">
-    <div class="project-card">
-      <h3>Personalized Dashboard</h3>
-      <p>A React-based dashboard with weather, news, to-do list, and quotes.</p>
-    </div>
-
-    <div class="project-card">
-      <h3><a href="https://gradify-ten.vercel.app" target="_blank">Gradify</a></h3>
-      <p>A tool for students with notes generator, flashcards, and progress tracking.</p>
-    </div>
-
-    <div class="project-card">
-      <h3><a href="https://playforge-six.vercel.com" target="_blank">PlayForge</a></h3>
-      <p>PlayForge is a modern gaming hub showcasing top games and real-time news. A personal project for frontend and API practice, not affiliated with any company.</p>
-    </div>
-
-    <div class="project-card">
-      <h3><a href="https://bloqhost.vercel.app" target="_blank">BloqHost</a></h3>
-      <p>A hosting project with simple, modern UI for developers and learners.</p>
-    </div>
-
-    <div class="project-card">
-      <h3>Portfolio Sites</h3>
-      <p>Several personal portfolio designs in Flask, React, and static HTML/CSS.</p>
-    </div>
+<header>
+  <div class="brand">
+    <h1 style="margin:0;font-weight:800;background:linear-gradient(90deg,var(--accent-from),var(--accent-to));-webkit-background-clip:text;color:transparent;">arnxv</h1>
   </div>
-</section>
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
+<main class="container">
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div>
+      <h2>Hi — I'm <span class="accent">Arnav</span></h2>
+      <p class="lead">12-year-old beginner programmer from India 🇮🇳. I explore web development, Discord bots, ethical hacking basics, and Minecraft server customization. Currently learning and building cool projects for fun.</p>
 
-  <!-- Experience -->
+      <div style="margin:16px 0;">
+        <a class="button primary" href="#projects">View my work</a>
+        <a class="chip" id="discord-status"><i class="fa-brands fa-discord"></i><span id="discord-text">Checking Discord...</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card"><h3>Personalized Dashboard</h3><p>A React-based dashboard with weather, news, to-do list, and quotes.</p></div>
+      <div class="project-card"><h3><a href="https://gradify-ten.vercel.app">Gradify</a></h3><p>A tool for students with notes generator, flashcards, and progress tracking.</p></div>
+      <div class="project-card"><h3><a href="https://playforge-six.vercel.app">PlayForge</a></h3><p>A Minecraft/gaming inspired hosting-style dashboard UI.</p></div>
+      <div class="project-card"><h3><a href="https://bloqhost.vercel.app">BloqHost</a></h3><p>A hosting dashboard concept project for developers.</p></div>
+      <div class="project-card"><h3>Portfolio Sites</h3><p>Several portfolio designs in Flask, React, and HTML/CSS.</p></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
   <section id="experience">
     <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Student Developer</h3><span>2023 - Present</span>
-        <p>Exploring web development, ethical hacking, and bot development while learning Python, PHP, and JavaScript.</p>
-      </div>
-      <div class="timeline-item">
-        <h3>Discord Bot Developer</h3><span>2024 - Present</span>
-        <p>Created economy bots like PreX Coins (archived now) with shop, inventory, games, and advanced features.</p>
-      </div>
-      <div class="timeline-item">
-        <h3>Web Projects</h3><span>2024 - Present</span>
-        <p>Built multiple dynamic websites using Flask, Node.js, and React including hosting dashboards and personal sites.</p>
-      </div>
-    </div>
+    <ul>
+      <li>Exploring programming since 2024 — Python, PHP, HTML/CSS, JS</li>
+      <li>Created <b>TSC Marketplace</b>, a school virtual currency system</li>
+      <li>Built <b>PreX Coins Discord Bot</b> with economy commands</li>
+      <li>Experimenting with <b>Minecraft servers & plugins</b></li>
+    </ul>
   </section>
 
-  <!-- Contact -->
+  <!-- CONTACT -->
   <section id="contact">
-    <h2><i class="fa-solid fa-address-book"></i> Contact</h2>
-    <p>You can reach out to me via:</p>
-    <div class="contact-links">
-      <a href="https://github.com/arnxv-coder" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-      <a href="mailto:me@arnxv.is-a.dev"><i class="fa-solid fa-envelope"></i> Email</a>
-      <a href="https://discord.com/users/1384352596357021736" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-      <a href="https://instagram.com/arnx.kxd" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    <h2><i class="fa-solid fa-envelope"></i> Get in touch</h2>
+    <div>
+      <a class="chip" href="https://github.com/ArnavBarway"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="chip" href="mailto:arnav@devarnav.is-a.dev"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a class="chip" href="https://discord.com/users/YOUR_DISCORD_ID"><i class="fa-brands fa-discord"></i> Discord</a>
     </div>
   </section>
 
-  <footer>
-    Not© 2025 Arnav | Made with ❤️ + code
-  </footer>
+  <footer>© 2025 arnxv · Crafted with ❤ + code</footer>
+</main>
 
-  <!-- Discord Presence Script -->
-  <script>
-    const userId = "1384352596357021736"; // your Discord user ID
-    const statusDiv = document.getElementById("discord-status");
+<script>
+  // Replace with your Discord User ID
+  const userId = "YOUR_DISCORD_ID";
+  const statusText = document.getElementById("discord-text");
 
-    async function fetchPresence() {
-      try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-        const data = await res.json();
-        if (data.success) {
-          const { discord_status, activities } = data.data;
-          const statusIcons = {
-            online: '<i class="fa-solid fa-circle text-green"></i> Online',
-            idle: '<i class="fa-solid fa-circle text-yellow"></i> Idle',
-            dnd: '<i class="fa-solid fa-circle text-red"></i> Do Not Disturb',
-            offline: '<i class="fa-regular fa-circle"></i> Offline'
-          };
-          let activity = activities[0] ? ` - ${activities[0].name}` : '';
-          statusDiv.innerHTML = `<i class="fa-brands fa-discord"></i> ${statusIcons[discord_status] || "Unknown"}${activity}`;
-        } else {
-          statusDiv.innerHTML = "<i class='fa-brands fa-discord'></i> Couldn't fetch status";
-        }
-      } catch {
-        statusDiv.innerHTML = "<i class='fa-brands fa-discord'></i> Error loading Discord status";
-      }
+  async function fetchLanyard(){
+    try{
+      const res = await fetch("https://api.lanyard.rest/v1/users/" + userId);
+      const json = await res.json();
+      if(!json.success) return statusText.textContent = "Offline";
+      const data = json.data;
+      const status = data.discord_status || "offline";
+      let label = status.charAt(0).toUpperCase() + status.slice(1);
+      statusText.textContent = label;
+    }catch(e){
+      statusText.textContent = "Discord unavailable";
     }
-
-    fetchPresence();
-    setInterval(fetchPresence, 15000); // update every 15s
-  </script>
+  }
+  fetchLanyard();
+  setInterval(fetchLanyard, 15000);
+</script>
 
 </body>
 </html>
