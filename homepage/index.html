@@ -3,185 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>arnxv | System Hub</title>
+    <title>System | Start Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;700&display=swap');
 
         :root {
-            --bg-color: #030303;
-            --panel-bg: rgba(10, 10, 12, 0.85);
+            --bg: #050505;
             --system-blue: #3b82f6;
             --monarch-purple: #8b5cf6;
             --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                              radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-image: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
         }
 
         .system-font {
             font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* Live Clock */
+        #clock {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--text-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Greeting / System Alert */
+        .greeting {
+            color: var(--system-blue);
+            font-size: 1rem;
+            margin-bottom: 3rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Search Container */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        /* Google Search Form */
+        form {
+            width: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1.2rem 1.5rem 1.2rem 3rem;
+            font-size: 1.1rem;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--monarch-purple);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.2), inset 0 0 10px rgba(139, 92, 246, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-dim);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* Search Icon (Simulated with a > bracket) */
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--system-blue);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        input[type="text"]:focus ~ .search-icon {
+            color: var(--monarch-purple);
+        }
+
+        /* Footer / Branding */
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
             letter-spacing: 1px;
         }
 
-        .hub-container {
-            width: 100%;
-            max-width: 450px;
-            padding: 2rem;
-            animation: systemBoot 1.5s ease-out forwards;
-        }
-
-        .alert-box {
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            background: var(--panel-bg);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15), inset 0 0 20px rgba(59, 130, 246, 0.05);
-            border-radius: 4px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
-
-        .alert-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--system-blue), transparent);
-        }
-
-        .system-header {
-            color: var(--system-blue);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -1px;
-            background: linear-gradient(to bottom right, #ffffff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .arise-glow {
+        .arise {
             color: var(--monarch-purple);
             font-style: italic;
-            text-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
-        }
-
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .nav-btn {
-            display: block;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            font-weight: 600;
-        }
-
-        .nav-btn:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: var(--system-blue);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .nav-btn.kage-btn {
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .nav-btn.kage-btn:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: var(--monarch-purple);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
-        }
-
-        .nav-btn span {
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes systemBoot {
-            0% { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        }
-
-        /* Scanline effect */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.3;
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
+
+    <div id="clock">00:00</div>
     
-    <div class="hub-container">
-        <div class="alert-box">
-            <div class="system-header system-font">
-                [ Notification: You have entered the Domain. ]
-            </div>
-            
-            <h1>arnxv</h1>
-            <p class="subtitle">Developer • Founder • <span class="arise-glow">Shadow Monarch</span></p>
+    <div class="greeting system-font" id="greeting">[ System: Awaiting Command ]</div>
 
-            <div class="nav-links">
-                <a href="https://arnxv.is-a.dev" class="nav-btn">
-                    <span class="system-font">> View Status Window [Portfolio]</span>
-                </a>
-
-                <a href="https://github.com/KageLabs-Foundation" class="nav-btn kage-btn">
-                    <span class="system-font">> Enter Kage Labs [Foundation]</span>
-                </a>
-
-                <a href="https://github.com/arnxv-coder" class="nav-btn" target="_blank">
-                    <span class="system-font">> Access Inventory [GitHub]</span>
-                </a>
-
-                <a href="mailto:me@arnxv.is-a.dev" class="nav-btn">
-                    <span class="system-font">> Comm-Link [Contact]</span>
-                </a>
-            </div>
-        </div>
+    <div class="search-container">
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" placeholder="Enter query..." autocomplete="off" autofocus>
+            <div class="search-icon system-font">></div>
+        </form>
     </div>
+
+    <div class="footer system-font">
+        BUILT BY <span style="color: var(--text-main)">ARNXV</span> // <span style="color: var(--text-main)">KAGE LABS</span> // <span class="arise">ARISE.</span>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            
+            // Format to 24-hour with leading zeros
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+        
+        // Update immediately, then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
